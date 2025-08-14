@@ -68,7 +68,7 @@ function App() {
 
     {/* Proyek Section */}
     <div className="proyek mt-32 py-10" id="proyek">
-      <h1 className="text-center tect-4xl font-bold mb-2" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">Proyek</h1>
+      <h1 className="text-center text-4xl font-bold mb-2" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">Proyek</h1>
       <p className="text-base/loose text-center opacity-50" data-aos="fade-up" data-aos-delay="300" data-aos-once="true">Berikut ini beberapa proyek yang telah dibuat.</p>
     </div>
     <div className="proyek-box mt-14 grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1: gap-4">
