@@ -1,121 +1,256 @@
 import DataImage from "./data";
-import { listTools, listProyek } from "./data"; 
+import { listTools, listProyek } from "./data";
+import ParticleBackground from "./components/ParticleBackground";
+import Navbar from "./components/Navbar";
+import { TypeAnimation } from 'react-type-animation';
+import Tilt from 'react-parallax-tilt';
 
 function App() {
   return (
-    <>
-    <div className="hero grid md:grid-cols-2 items-center pt-10 xl:gap-0 gap-6 grid-cols-1">
-      <div className="animate__animated animate__fadeInUp animate__delay-3s">
-        <div className="flex items-center gap-3 mb-6 bg-zinc-800 w-fit p-4 rounded-2xl" loading="lazy">
-          <img src= {DataImage.HeroImage} alt="Hero Image" className="w-10 rounded-md"/>
-          <q>Setiap baris kode adalah langkah menuju mimpi.</q>
-        </div>
-        <h1 className="text-5xl/tight font-bold mb-6">Hi, Saya Fawwaz Muhammad Syams</h1>
-        <p className="text-base/loose mb-6 opacity-50">Saya mempunyai ketertarikan dalam bidang programming dan designer, terutama pada
-        pembuatan website. dan desain poster, pamflet serta Banner. Saya juga mahasiswa aktif di
-        Politeknik TEDC Bandung jurusan Teknik Informatika. 
-        </p>
-      <div className="flex items-center sm:gap-4 gap-2">
-        {/*<a href="#" className="bg-violet-700 p-4 rounded-4xl hover:bg-violet-600">Download CV <i className="ri-download-line ri-lg"></i></a>*/}
-        <a href="#proyek" className="bg-violet-700 p-4 rounded-4xl hover:bg-violet-600">Lihat Proyek <i className="ri-arrow-down-fill ri-lg"></i></a>
+    <div className="relative min-h-screen bg-transparent overflow-x-hidden">
+      <div className="fixed inset-0 z-[-1]">
+        <ParticleBackground />
       </div>
-      </div>
-      <img src={DataImage.HeroImage} alt="Hero Image" className="w-[500px] md:ml-auto animate__animated animate__fadeInUp animate__delay-4s" loading="lazy"/>
-    </div>
+      <Navbar />
+      <div className="relative z-10 container mx-auto px-4">
 
-    {/* Tentang Section */}
-    <div className="tentang mt-32 py-10" id="tentang">
-      <div className="xl:w-2/3 lg:w-3/4 w-full mx-auto p-7 bg-zinc-800 rounded-lg" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true"> 
-        <img src={DataImage.HeroImage} alt="Image" className="w-12 rounded-md mb-10 sm:hidden" />
-        <p className="text-base/loose mb-10">
-          Hi, Perkenalkan saya Fawwaz Muhammad Syams, seorang mahasiswa aktif yang meminati Web Developer, Designer
-          UI/UX dan Graphic Desgin. Saya percaya bahwa desain dan fungsionalitas harus berjalan beriringan, sehingga setiap
-          proyek yang saya kembangkan  tidak hanya terlihat menarik tetapi juga memberikan pengalaman pengguna yang optimal.
-        </p>
-
-        <div className="flex items-center justify-between gap-4">
-          <img src={DataImage.HeroImage} alt="Image" className="w-12 rounded-md sm:block hidden" />
-          <div className="flex items-center gap-6">
-            <div>
-              <h1 className="text-4xl mb-1">15<span className="text-violet-500">+</span></h1>
-              <p>Proyek Selesai</p>
+        {/* === HERO SECTION === */}
+        <div id="beranda" className="hero grid md:grid-cols-2 items-center pt-36 md:pt-24 pb-10 xl:gap-0 gap-6 grid-cols-1 min-h-screen">
+          <div className="animate__animated animate__fadeInUp">
+            <div className="flex items-center gap-3 mb-6 bg-zinc-800/80 backdrop-blur-sm w-fit p-4 rounded-2xl" loading="lazy">
+              <img src={DataImage.HeroImage} alt="Hero Image" className="w-10 rounded-md" />
+              <q>Setiap baris kode adalah langkah menuju mimpi.</q>
             </div>
-            <div>
-              <h1 className="text-4xl mb-1">2<span className="text-violet-500">+</span></h1>
-              <p>Tahun Pengalaman</p>
+            <h1 className="text-5xl/tight font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-cyan-400">
+              Hi, Saya Fawwaz Muhammad Syams
+            </h1>
+            <div className="text-2xl font-semibold mb-6 text-violet-400 h-10">
+              <TypeAnimation
+                sequence={[
+                  'Fullstack Web Developer',
+                  1500,
+                  'React & Laravel Enthusiast',
+                  1500,
+                  'Data Science & UI/UX',
+                  1500,
+                ]}
+                wrapper="span"
+                speed={50}
+                repeat={Infinity}
+              />
+            </div>
+
+            <p className="text-base/loose mb-6 opacity-50">
+              Saya mempunyai ketertarikan dalam bidang programming dan designer, terutama pada
+              pembuatan website, desain poster, pamflet, serta Banner. Saya juga mahasiswa aktif di
+              Politeknik TEDC Bandung jurusan Teknik Informatika.
+            </p>
+            <div className="flex items-center sm:gap-4 gap-2">
+              <a href="#proyek" className="bg-violet-700 p-4 rounded-4xl hover:bg-violet-600">
+                Lihat Proyek <i className="ri-arrow-down-fill ri-lg"></i>
+              </a>
+            </div>
+          </div>
+          <div className="flex justify-center md:justify-end mt-12 md:mt-0 relative z-10" data-aos="fade-up" data-aos-delay="200">
+            <div className="relative w-[280px] sm:w-[350px] md:w-[400px]">
+
+              <div className="absolute inset-0 bg-gradient-to-l from-violet-600 to-cyan-400 blur-3xl opacity-5 rounded-full animate-pulse"></div>
+
+              <img
+                src={DataImage.HeroImage}
+                alt="Profile Fawwaz"
+                className="relative z-10 w-full object-cover rounded-3xl border border-zinc-700/50 shadow-2xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(139,92,246,0.3)]"
+                loading="lazy"
+              />
             </div>
           </div>
         </div>
-      </div>
-      <div className="tools mt-32">
-        <h1 className="text-4xl/snug font-bold mb-4"  data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">Tools yang dipakai</h1>
-        <p className="xl:w-2/5 lg:w-2/4 md:2/3 sm:w-3/4 w-full text-base/loose opacity-50"  data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" data-aos-once="true">Berikut ini beberapa tools yang biasa saya pakai untuk pembuatan Website dan Desain</p>
-        <div className="tool-box mt-14 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4">
 
-          {listTools.map(tool => (
-            <div className=" flex items-center gap-2 p-3 border border-zinc-600 rounded-md hover:bg-zinc-800 group" key={tool.id} data-aos="fade-up" data-aos-duration="1000" data-aos-delay={tool.dad} data-aos-once="true">
-            <img src= {tool.gambar} alt="Tools Image" className="w-14 bg-zinc-800 p-1 group-hover:bg-zinc-900" />
-            <div>
-              <h4 className="font-bold">{tool.nama}</h4>
-              <p className="opacity-50">{tool.ket}</p>
+        {/* === TENTANG SECTION === */}
+        <div className="tentang mt-32 py-10" id="tentang">
+          <div className="xl:w-2/3 lg:w-3/4 w-full mx-auto p-7 bg-zinc-800/80 backdrop-blur-sm rounded-lg" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
+            <img src={DataImage.HeroImage} alt="Image" className="w-12 rounded-md mb-10 sm:hidden" />
+            <p className="text-base/loose mb-10">
+              Hi, Perkenalkan saya Fawwaz Muhammad Syams, seorang mahasiswa aktif yang meminati Web Developer, Designer
+              UI/UX dan Graphic Desgin. Saya percaya bahwa desain dan fungsionalitas harus berjalan beriringan, sehingga setiap
+              proyek yang saya kembangkan tidak hanya terlihat menarik tetapi juga memberikan pengalaman pengguna yang optimal.
+            </p>
+
+            <div className="flex items-center justify-between gap-4">
+              <img src={DataImage.HeroImage} alt="Image" className="w-12 rounded-md sm:block hidden" />
+              <div className="flex items-center gap-6">
+                <div>
+                  <h1 className="text-4xl mb-1">15<span className="text-violet-500">+</span></h1>
+                  <p>Proyek Selesai</p>
+                </div>
+                <div>
+                  <h1 className="text-4xl mb-1">2<span className="text-violet-500">+</span></h1>
+                  <p>Tahun Pengalaman</p>
+                </div>
+              </div>
             </div>
           </div>
+
+          <div className="tools mt-32">
+            <h1 className="text-4xl/snug font-bold mb-4 text-center" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-500">Tech Stack</span> & Tools
+            </h1>
+            <p className="w-full sm:w-2/3 mx-auto text-base/loose opacity-50 text-center mb-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" data-aos-once="true">
+              Teknologi yang saya gunakan untuk meracik antarmuka web, membangun API backend, hingga mengolah data.
+            </p>
+
+            <div className="relative flex overflow-hidden w-full bg-zinc-900/30 py-8 rounded-2xl border border-zinc-800/50"
+              style={{
+                maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+                WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
+              }}
+            >
+              <div className="animate-scroll whitespace-nowrap flex items-center gap-8 px-4">
+                {[...listTools, ...listTools].map((tool, index) => (
+                  <div
+                    key={`${tool.id}-${index}`}
+                    className="flex items-center gap-4 p-4 min-w-[200px] border border-zinc-700/50 rounded-xl bg-zinc-800/80 backdrop-blur-sm hover:border-violet-500/50 transition-colors shadow-lg"
+                  >
+                    <div className="bg-zinc-900 p-2 rounded-lg shadow-inner">
+                      <img src={tool.gambar} alt={tool.nama} className="w-10 h-10 object-contain" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-zinc-200">{tool.nama}</h4>
+                      <p className="text-xs text-zinc-400">{tool.ket}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* === PROYEK SECTION === */}
+        <div className="proyek mt-16 py-10" id="proyek">
+          <h1 className="text-center text-4xl font-bold mb-2" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">Proyek</h1>
+          <p className="text-base/loose text-center opacity-50" data-aos="fade-up" data-aos-delay="300" data-aos-once="true">Beberapa karya dan eksplorasi teknologi yang telah saya bangun.</p>
+        </div>
+
+        <div className="proyek-box mt-14 grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8">
+          {listProyek.map(proyek => (
+            <Tilt
+              key={proyek.id}
+              tiltMaxAngleX={10}
+              tiltMaxAngleY={10}
+              perspective={1000}
+              transitionSpeed={1000}
+              scale={1.02}
+              glareEnable={true}
+              glareMaxOpacity={0.15}
+              glarePosition="all"
+              className="h-full"
+            >
+              <div
+                className="group relative flex flex-col justify-between p-5 bg-zinc-800/60 backdrop-blur-sm border border-zinc-700 rounded-2xl overflow-hidden h-full"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                data-aos-delay={proyek.dad}
+                data-aos-once="true"
+              >
+                {/* Bungkus gambar buat efek zoom */}
+                <div className="overflow-hidden rounded-xl mb-5">
+                  <img
+                    src={proyek.gambar}
+                    alt="Proyek Image"
+                    loading="lazy"
+                    className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                </div>
+
+                <div className="flex-1">
+                  <h1 className="text-xl font-bold mb-3 group-hover:text-violet-400 transition-colors">{proyek.nama}</h1>
+                  <p className="text-sm/relaxed text-zinc-400 mb-6">{proyek.desk}</p>
+                </div>
+
+                <div className="flex flex-wrap gap-2 mt-auto pt-4 border-t border-zinc-700/50">
+                  {proyek.tools.map((tool, index) => (
+                    <span
+                      className="text-xs py-1 px-3 border border-zinc-600 bg-zinc-900/50 text-zinc-300 rounded-full font-medium"
+                      key={index}
+                    >
+                      {tool}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </Tilt>
           ))}
         </div>
+
+        {/* === KONTAK SECTION === */}
+        <div className="kontak mt-32 sm:p-10 p-4 mb-20" id="kontak">
+          <h1 className="text-4xl mb-2 font-bold text-center" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">Mari Berkolaborasi</h1>
+          <p className="text-base/loose text-center mb-10 opacity-50" data-aos="fade-up" data-aos-delay="300" data-aos-once="true">
+            Punya ide proyek, tawaran pekerjaan, atau sekadar ingin menyapa? Jangan ragu untuk mengirim pesan!
+          </p>
+
+          <form
+            action="https://formsubmit.co/fawwazsyams04@email.com"
+            method="POST"
+            className="bg-zinc-800/50 backdrop-blur-md border border-zinc-700/50 p-8 sm:p-12 max-w-2xl rounded-2xl mx-auto shadow-xl"
+            autoComplete="off"
+            data-aos="fade-up"
+            data-aos-delay="500"
+            data-aos-once="true"
+          >
+            <div className="flex flex-col gap-6">
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-semibold text-zinc-300">Nama Lengkap</label>
+                  <input
+                    type="text"
+                    name="nama"
+                    placeholder="Masukkan nama..."
+                    className="w-full bg-zinc-900/50 border border-zinc-700 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition-all placeholder:text-zinc-600"
+                    required
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-semibold text-zinc-300">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="nama@email.com"
+                    className="w-full bg-zinc-900/50 border border-zinc-700 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition-all placeholder:text-zinc-600"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="text-sm font-semibold text-zinc-300">Pesan</label>
+                <textarea
+                  name="pesan"
+                  rows="5"
+                  placeholder="Ceritakan tentang proyek atau tujuanmu..."
+                  className="w-full bg-zinc-900/50 border border-zinc-700 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition-all placeholder:text-zinc-600 resize-none"
+                  required
+                />
+              </div>
+
+              <div className="text-center mt-4">
+                <button
+                  type="submit"
+                  className="bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold py-4 px-8 rounded-xl w-full sm:w-auto shadow-lg shadow-violet-500/30 hover:shadow-violet-500/50 hover:-translate-y-1 transition-all duration-300"
+                >
+                  Kirim Pesan
+                </button>
+              </div>
+
+            </div>
+          </form>
+        </div>
+        {/* === KONTAK SECTION === */}
+
       </div>
     </div>
-    {/* tentang Section */}
-
-    {/* Proyek Section */}
-    <div className="proyek mt-32 py-10" id="proyek">
-      <h1 className="text-center text-4xl font-bold mb-2" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">Proyek</h1>
-      <p className="text-base/loose text-center opacity-50" data-aos="fade-up" data-aos-delay="300" data-aos-once="true">Berikut ini beberapa proyek yang telah dibuat.</p>
-    </div>
-    <div className="proyek-box mt-14 grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1: gap-4">
-      { listProyek.map(proyek => (
-        <div key={proyek.id} className="p-4 bg-zinc-600 rounded-lg"  data-aos="fade-up" data-aos-duration="1000" data-aos-delay={proyek.dad} data-aos-once="true">
-          <img src={proyek.gambar} alt="Proyek Image" loading="lazy" />
-          <div>
-            <h1 className="text-2xl font-bold my-4">{proyek.nama}</h1>
-            <p className="text-base/loose mb-4">{proyek.desk}</p>
-            <div className="flex flex-wrap gap-2">
-              {proyek.tools.map((tool, index) => (
-                <p className="py-1 px-3 border border-zinc-500 bg-zinc-600 rounded-md font-semibold" key={index}>{tool}</p>
-              ))}
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-    {/* Proyek Section */}
-
-    {/* Kontak Section */}
-    <div className="kontak mt-32 sm:p-10 p-0" id="kontak">
-      <h1 className="text-4xl mb-2 font-bold text-center"  data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">Kontak</h1>
-      <p className="text-base/loose text-center mb-10 opacity-50" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" data-aos-once="true">Mari terhubung dengan saya!</p>
-      <form action="https://formsubmit.co/fawwazsyams04@email.com" method="POST" className="bg-zinc-800 p-10 sm:w-fit w-full rounded-md mx-auto " autoComplete="off" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500" data-aos-once="true">
-        <div className="flex flex-col gap-6">
-          <div className="flex flex-col gap-2">
-            <label className="font-semibold">Nama</label>
-            <input type="text" name="nama" placeholder="Masukan Nama..." className="border border-zinc-500 p-2 rounded-md" required />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label className="font-semibold">Email</label>
-            <input type="text" name="email" placeholder="Masukan Email..." className="border border-zinc-500 p-2 rounded-md" required />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label className="font-semibold">Pesan</label>
-            <textarea name="email" id="pesan" cols="45" rows="7" placeholder="Masukan Pesan..." className="border border-zinc-500 p-2 rounded-md" required />
-          </div>
-          <div className="text-center">
-          <button type="submit" className="bg-violet-700 p-3 rounded-lg w-full cursor-pointer border border-zinc-600 hover:bg-violet-600">Kirim Pesan</button>
-          </div>
-        </div>
-      </form>
-    </div>
-    {/* Kontak Section */}
-    </>
-  )
+  );
 }
 
-export default App
+export default App;

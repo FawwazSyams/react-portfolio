@@ -1,37 +1,21 @@
-import { useState, useEffect } from "react";
+export default function Navbar() {
+    return (
+        <nav className="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-4xl">
+            <div className="bg-zinc-900/60 backdrop-blur-md border border-zinc-700 rounded-full px-6 py-3 flex items-center justify-between shadow-lg">
 
-const navbar = () => {
-    const [active, setActive] = useState(false);
+                <a href="#beranda" className="text-xl font-extrabold tracking-wide">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-cyan-400">Syams</span>
+                    <span className="text-white">Dev</span>
+                </a>
 
-    useEffect(() => {
-        const handleScroll = () => {
-            if(window.scrollY > 150) {
-                setActive(true);
-            } else {
-                setActive(false);
-            }
-        };
-        window.addEventListener("scroll", handleScroll);
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
+                <div className="hidden sm:flex items-center gap-8">
+                    <a href="#beranda" className="text-sm font-medium text-zinc-300 hover:text-violet-400 transition-colors">Beranda</a>
+                    <a href="#tentang" className="text-sm font-medium text-zinc-300 hover:text-violet-400 transition-colors">Tentang</a>
+                    <a href="#proyek" className="text-sm font-medium text-zinc-300 hover:text-violet-400 transition-colors">Proyek</a>
+                    <a href="#kontak" className="text-sm font-medium text-zinc-300 hover:text-violet-400 transition-colors">Kontak</a>
+                </div>
 
-  return <div className="navbar py-7 flex items-center justify-between">
-    <div className="logo">
-        <h1 className="text-3xl font-bold bg-zinc-900 text-white rounded-md p-1">Syams<span className="text-3xl font-bold text-violet-600">Dev</span></h1>
-    </div>
-    <ul className={`menu flex items-center sm:gap-10 gap-4 md:static fixed left-1/2 -translate-x-1/2 md:-trasnlate-x-0 md:opacity-100 bg-white/30 backdrop-blur-md p-4 rounded-br-2xl rounded-bl-2xl md:bg-transparent transition-all md:transition-none z-40 ${active ? "top-0 opacity-100" : "-top-10 opacity-0"}`}>
-        <li><a href="#" className="sm:text-lg text-base font-medium">Beranda</a>
-        </li>
-        <li><a href="#tentang" className="sm:text-lg text-base font-medium">Tentang</a>
-        </li>
-        <li><a href="#proyek" className="sm:text-lg text-base font-medium">Proyek</a>
-        </li>
-        <li><a href="#kontak" className="sm:text-lg text-base font-medium">Kontak</a>
-        </li>
-    </ul>
-    </div>
+            </div>
+        </nav>
+    );
 }
-
-export default navbar
