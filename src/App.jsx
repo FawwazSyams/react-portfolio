@@ -41,7 +41,7 @@ function App() {
             </div>
 
             <p className="text-base/loose mb-6 opacity-50">
-              Saya mempunyai ketertarikan dalam bidang programming dan designer, terutama pada
+              Saya mempunyai ketertarikan dalam bidang programming dan design, terutama pada
               pembuatan website, desain poster, pamflet, serta Banner. Saya juga mahasiswa aktif di
               Politeknik TEDC Bandung jurusan Teknik Informatika.
             </p>
@@ -71,7 +71,7 @@ function App() {
           <div className="xl:w-2/3 lg:w-3/4 w-full mx-auto p-7 bg-zinc-800/80 backdrop-blur-sm rounded-lg" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
             <img src={DataImage.HeroImage} alt="Image" className="w-12 rounded-md mb-10 sm:hidden" />
             <p className="text-base/loose mb-10">
-              Hi, Perkenalkan saya Fawwaz Muhammad Syams, seorang mahasiswa aktif yang meminati Web Developer, Designer
+              Hi, Perkenalkan saya Fawwaz Muhammad Syams, seorang mahasiswa aktif yang meminati Web Developer, Design
               UI/UX dan Graphic Desgin. Saya percaya bahwa desain dan fungsionalitas harus berjalan beriringan, sehingga setiap
               proyek yang saya kembangkan tidak hanya terlihat menarik tetapi juga memberikan pengalaman pengguna yang optimal.
             </p>
@@ -176,6 +176,33 @@ function App() {
                       {tool}
                     </span>
                   ))}
+                </div>
+                {/* === TAMBAHAN TOMBOL DEMO & GITHUB === */}
+                <div className="flex items-center gap-3 mt-5">
+                  {/* Render tombol GitHub kalau link-nya diisi */}
+                  {proyek.linkGithub && (
+                    <a
+                      href={proyek.linkGithub}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex-1 flex justify-center items-center gap-2 py-2.5 bg-zinc-700/50 hover:bg-zinc-600 border border-zinc-600 rounded-xl text-sm font-semibold transition-all hover:scale-[1.02]"
+                    >
+                      {/* Kalau kamu pakai Remix Icon, kodenya ini. Kalau nggak, hapus aja tag <i> nya */}
+                      <i className="ri-github-fill text-lg"></i> GitHub
+                    </a>
+                  )}
+
+                  {/* Render tombol Live Demo kalau link-nya diisi */}
+                  {proyek.linkWebsite && (
+                    <a
+                      href={proyek.linkWebsite}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex-1 flex justify-center items-center gap-2 py-2.5 bg-violet-600/80 hover:bg-violet-500 border border-violet-500 rounded-xl text-sm font-semibold transition-all hover:scale-[1.02]"
+                    >
+                      <i className="ri-external-link-line text-lg"></i> Live
+                    </a>
+                  )}
                 </div>
               </div>
             </Tilt>

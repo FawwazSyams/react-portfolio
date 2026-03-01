@@ -1,4 +1,4 @@
-import HeroImage from "/assets/hero-image.png";
+import HeroImage from "/assets/hero-image.jpeg";
 
 const Image = {
   HeroImage,
@@ -109,6 +109,7 @@ export const listTools = [
 import Proyek1 from "/assets/proyek/proyek1.png";
 import Proyek2 from "/assets/proyek/proyek2.png";
 import Proyek3 from "/assets/proyek/proyek3.png";
+import Proyek4 from "/assets/proyek/proyek4.png";
 
 export const listProyek = [
   {
@@ -117,6 +118,8 @@ export const listProyek = [
     nama: "Sistem Informasi Klinik",
     desk: "Sebuah Sistem informasi klinik sederhana yang dibuat menggunakan PHP native dan MySQL",
     tools: ["HTML", "CSS", "PHP", "MYSQL", "Javascript"],
+    linkGithub: "",
+    linkWebsite: "",
     dad: "200",
   },
   {
@@ -125,6 +128,8 @@ export const listProyek = [
     nama: "Vocabri App",
     desk: "Aplikasi pembelajaran kosakata bahasa Inggris sederhana",
     tools: ["Figma", "Canva", "Adobe Photoshop"],
+    linkGithub: "",
+    linkWebsite: "",
     dad: "300",
   },
   {
@@ -133,6 +138,18 @@ export const listProyek = [
     nama: "Logo Kontingen Ranting Cililin",
     desk: "Official logo untuk kontingen ranting Cililin pada Raimuna Daerah Jawa Barat 2024",
     tools: ["Adobe Illustrator", "Adobe Photoshop"],
+    linkGithub: "",
+    linkWebsite: "",
     dad: "400",
+  },
+  {
+    id: 4,
+    gambar: Proyek4,
+    nama: "Prediksi Harga Pemain Sepak Bola",
+    desk: "Sebuah website yang dibuat untuk memprediksi harga pemain sepak bola berdasarkan dataset yang telah dikumpulkan",
+    tools: ["React JS", "Laravel", "Python"],
+    linkGithub: "https://github.com/FawwazSyams/Football-Players-Market-Value-Predictor.git",
+    linkWebsite: "https://fawdawproject.vercel.app",
+    dad: "500",
   },
 ];
