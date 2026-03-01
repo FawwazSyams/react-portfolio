@@ -1,5 +1,5 @@
 import DataImage from "./data";
-import { listTools, listProyek } from "./data";
+import { listTools, listProyek, listSertifikat } from "./data";
 import ParticleBackground from "./components/ParticleBackground";
 import Navbar from "./components/Navbar";
 import { TypeAnimation } from 'react-type-animation';
@@ -46,8 +46,16 @@ function App() {
               Politeknik TEDC Bandung jurusan Teknik Informatika.
             </p>
             <div className="flex items-center sm:gap-4 gap-2">
-              <a href="#proyek" className="bg-violet-700 p-4 rounded-4xl hover:bg-violet-600">
+              <a href="#proyek" className="bg-violet-700 text-white py-3 px-6 rounded-full hover:bg-violet-600 transition-all hover:shadow-[0_0_20px_rgba(109,40,217,0.5)] flex items-center gap-2 font-semibold">
                 Lihat Proyek <i className="ri-arrow-down-fill ri-lg"></i>
+              </a>
+
+              <a
+                href="/CV_FawwazMuhammadSyams.pdf"
+                download="CV_Fawwaz_Muhammad_Syams.pdf"
+                className="border-2 border-zinc-600 text-zinc-300 py-3 px-6 rounded-full hover:border-violet-500 hover:text-violet-400 transition-all flex items-center gap-2 font-semibold bg-zinc-900/50"
+              >
+                Download CV <i className="ri-download-line ri-lg"></i>
               </a>
             </div>
           </div>
@@ -152,7 +160,6 @@ function App() {
                 data-aos-delay={proyek.dad}
                 data-aos-once="true"
               >
-                {/* Bungkus gambar buat efek zoom */}
                 <div className="overflow-hidden rounded-xl mb-5">
                   <img
                     src={proyek.gambar}
@@ -177,9 +184,7 @@ function App() {
                     </span>
                   ))}
                 </div>
-                {/* === TAMBAHAN TOMBOL DEMO & GITHUB === */}
                 <div className="flex items-center gap-3 mt-5">
-                  {/* Render tombol GitHub kalau link-nya diisi */}
                   {proyek.linkGithub && (
                     <a
                       href={proyek.linkGithub}
@@ -187,12 +192,10 @@ function App() {
                       rel="noreferrer"
                       className="flex-1 flex justify-center items-center gap-2 py-2.5 bg-zinc-700/50 hover:bg-zinc-600 border border-zinc-600 rounded-xl text-sm font-semibold transition-all hover:scale-[1.02]"
                     >
-                      {/* Kalau kamu pakai Remix Icon, kodenya ini. Kalau nggak, hapus aja tag <i> nya */}
                       <i className="ri-github-fill text-lg"></i> GitHub
                     </a>
                   )}
 
-                  {/* Render tombol Live Demo kalau link-nya diisi */}
                   {proyek.linkWebsite && (
                     <a
                       href={proyek.linkWebsite}
@@ -208,6 +211,58 @@ function App() {
             </Tilt>
           ))}
         </div>
+
+        {/* === SERTIFIKAT SECTION === */}
+        <div className="sertifikat mt-32 py-10" id="sertifikat">
+          <h1 className="text-center text-4xl font-bold mb-2" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">Sertifikat & Penghargaan</h1>
+          <p className="text-base/loose text-center opacity-50 mb-14" data-aos="fade-up" data-aos-delay="300" data-aos-once="true">Validasi keahlian dan pencapaian akademik maupun profesional.</p>
+
+          <div className="sertifikat-box grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8">
+            {listSertifikat.map(sertifikat => (
+              <div
+                key={sertifikat.id}
+                className="group relative flex flex-col p-5 bg-zinc-800/60 backdrop-blur-sm border border-zinc-700 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(139,92,246,0.15)] hover:border-violet-500/50"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                data-aos-delay={sertifikat.dad}
+                data-aos-once="true"
+              >
+                {/* Gambar Sertifikat */}
+                <div className="overflow-hidden rounded-xl mb-5 relative bg-zinc-900">
+                  <div className="absolute inset-0 bg-violet-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none"></div>
+                  <img
+                    src={sertifikat.gambar}
+                    alt="Sertifikat"
+                    loading="lazy"
+                    className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+
+                {/* Detail Sertifikat */}
+                <div className="flex-1 flex flex-col justify-between">
+                  <div>
+                    <h1 className="text-lg font-bold mb-2 group-hover:text-violet-400 transition-colors leading-snug">{sertifikat.nama}</h1>
+                    <p className="text-sm text-zinc-400 mb-6 font-medium flex items-center gap-2">
+                      <i className="ri-award-fill text-violet-500"></i> {sertifikat.penerbit}
+                    </p>
+                  </div>
+
+                  {sertifikat.link && (
+                    <a
+                      href={sertifikat.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-auto flex justify-center items-center gap-2 py-2.5 bg-zinc-700/50 hover:bg-violet-600 border border-zinc-600 hover:border-violet-500 rounded-xl text-sm font-semibold transition-all hover:scale-[1.02]"
+                    >
+                      <i className="ri-verified-badge-line text-lg"></i> Lihat Sertifikat
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* === SERTIFIKAT SECTION === */}
 
         {/* === KONTAK SECTION === */}
         <div className="kontak mt-32 sm:p-10 p-4 mb-20" id="kontak">
@@ -274,7 +329,6 @@ function App() {
           </form>
         </div>
         {/* === KONTAK SECTION === */}
-
       </div>
     </div>
   );

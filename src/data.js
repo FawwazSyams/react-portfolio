@@ -110,6 +110,8 @@ import Proyek1 from "/assets/proyek/proyek1.png";
 import Proyek2 from "/assets/proyek/proyek2.png";
 import Proyek3 from "/assets/proyek/proyek3.png";
 import Proyek4 from "/assets/proyek/proyek4.png";
+import Proyek5 from "/assets/proyek/proyek5.png";
+import Proyek6 from "/assets/proyek/proyek6.jpeg";
 
 export const listProyek = [
   {
@@ -151,5 +153,56 @@ export const listProyek = [
     linkGithub: "https://github.com/FawwazSyams/Football-Players-Market-Value-Predictor.git",
     linkWebsite: "https://fawdawproject.vercel.app",
     dad: "500",
+  },
+  {
+    id: 5,
+    gambar: Proyek5,
+    nama: "Deteksi Jenis Ras Kucing",
+    desk: "Website yang dibuat untuk mengidentifikasi jenis ras kucing berdasarkan gambar yang diupload",
+    tools: ["React JS", "Python"],
+    linkGithub: "https://github.com/FawwazSyams/deteksi-jenis-kucing.git",
+    linkWebsite: "https://fawcat.vercel.app",
+    dad: "600",
+  },
+  {
+    id: 6,
+    gambar: Proyek6,
+    nama: "Sistem API Event Kampus",
+    desk: "Sistem API event kampus yang dibuat untuk memudahkan pengguna dalam mengelola event kampus menggunakan Laravel",
+    tools: ["Laravel", "PHP", "MYSQL"],
+    linkGithub: "https://github.com/FawwazSyams/api-event-kampus.git",
+    linkWebsite: "",
+    dad: "700",
+  },
+];
+
+import sertifikat1 from "/assets/sertifikat/sertifikat1.png";
+import sertifikat2 from "/assets/sertifikat/sertifikat2.png";
+import sertifikat3 from "/assets/sertifikat/sertifikat3.png";
+
+export const listSertifikat = [
+  {
+    id: 1,
+    nama: "Microsoft Office Specialist: Excel 2019 Assosicate",
+    penerbit: "Microsoft",
+    gambar: sertifikat1,
+    link: "https://drive.google.com/file/d/1HCYLsXGOqw6MZTV8kZ_LTMfKc0zJ1sY0/view?usp=drive_link",
+    dad: "200",
+  },
+  {
+    id: 2,
+    nama: "Partner: NDG Linux Essentials",
+    penerbit: "Cisco",
+    gambar: sertifikat2,
+    link: "https://drive.google.com/file/d/1ZkhO-Q6GU9-QQMi91SIV9MtOQHiAizBw/view?usp=drive_link",
+    dad: "300",
+  },
+  {
+    id: 3,
+    nama: "Partner: NDG Linux Unchated",
+    penerbit: "Cisco",
+    gambar: sertifikat3,
+    link: "https://drive.google.com/file/d/1noe4Dipk_cHpH7XgyEQXuDgxvYR_RHFh/view?usp=sharing",
+    dad: "400",
   },
 ];

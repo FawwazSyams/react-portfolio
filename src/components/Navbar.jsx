@@ -12,6 +12,7 @@ export default function Navbar() {
                     <a href="#beranda" className="text-sm font-medium text-zinc-300 hover:text-violet-400 transition-colors">Beranda</a>
                     <a href="#tentang" className="text-sm font-medium text-zinc-300 hover:text-violet-400 transition-colors">Tentang</a>
                     <a href="#proyek" className="text-sm font-medium text-zinc-300 hover:text-violet-400 transition-colors">Proyek</a>
+                    <a href="#sertifikat" className="text-sm font-medium text-zinc-300 hover:text-violet-400 transition-colors">Sertifikat</a>
                     <a href="#kontak" className="text-sm font-medium text-zinc-300 hover:text-violet-400 transition-colors">Kontak</a>
                 </div>
 
