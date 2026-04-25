@@ -5,6 +5,18 @@ import Navbar from "./components/Navbar";
 import { TypeAnimation } from 'react-type-animation';
 import Tilt from 'react-parallax-tilt';
 
+const openInstagram = () => {
+  const username = "sakabhayangkara.cimahi";
+  const appLink = `instagram://user?username=${username}`;
+  const webLink = `https://www.instagram.com/${username}/`;
+
+  window.location.href = appLink;
+
+  setTimeout(() => {
+    window.location.href = webLink;
+  }, 1500);
+};
+
 function App() {
   return (
     <div className="relative min-h-screen bg-transparent overflow-x-hidden">
@@ -223,7 +235,7 @@ function App() {
             {/* Floating Design Images */}
             <div className="absolute inset-0 pointer-events-none opacity-[0.15] sm:opacity-20 group-hover:opacity-40 transition-opacity duration-700 z-0 overflow-hidden">
               {listIgDesigns.map((img, index) => (
-                <img 
+                <img
                   key={index}
                   src={img}
                   alt="Desain Background"
@@ -256,17 +268,15 @@ function App() {
             </div>
 
             <div className="relative z-10 shrink-0">
-              <a
-                href="https://www.instagram.com/sakabhayangkara.cimahi/"
-                target="_blank"
-                rel="noreferrer"
+              <button
+                onClick={openInstagram}
                 className="group/btn relative inline-flex items-center justify-center gap-3 px-8 py-4 font-bold text-white transition-all duration-300 bg-gradient-to-r from-violet-600 to-pink-500 rounded-2xl hover:scale-105 hover:shadow-[0_10px_40px_rgba(236,72,153,0.4)] overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-violet-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500"></div>
                 <i className="ri-instagram-fill text-2xl relative z-10"></i>
                 <span className="relative z-10 text-lg">Lihat Instagram</span>
                 <i className="ri-arrow-right-up-line text-xl relative z-10 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform"></i>
-              </a>
+              </button>
             </div>
           </div>
         </div>
