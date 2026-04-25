@@ -179,6 +179,8 @@ export const listProyek = [
 import sertifikat1 from "/assets/sertifikat/sertifikat1.png";
 import sertifikat2 from "/assets/sertifikat/sertifikat2.png";
 import sertifikat3 from "/assets/sertifikat/sertifikat3.png";
+import sertifikat4 from "/assets/sertifikat/sertifikat4.png";
+import sertifikat5 from "/assets/sertifikat/sertifikat5.png";
 
 export const listSertifikat = [
   {
@@ -191,18 +193,34 @@ export const listSertifikat = [
   },
   {
     id: 2,
-    nama: "Partner: NDG Linux Essentials",
-    penerbit: "Cisco",
-    gambar: sertifikat2,
-    link: "https://drive.google.com/file/d/1ZkhO-Q6GU9-QQMi91SIV9MtOQHiAizBw/view?usp=drive_link",
+    nama: "Pemrograman Web Dasar",
+    penerbit: "Dicoding",
+    gambar: sertifikat4,
+    link: "https://drive.google.com/file/d/138zKWplY2lO55xkUDjsnvIPd_YigfurR/view?usp=sharing",
     dad: "300",
   },
   {
     id: 3,
+    nama: "Data Science Introduction",
+    penerbit: "MySkill x IdScore",
+    gambar: sertifikat5,
+    link: "https://drive.google.com/file/d/19VnxGjDH6sT8rsBfx4hFZBeUm38i5L7C/view?usp=drive_link",
+    dad: "400",
+  },
+  {
+    id: 4,
+    nama: "Partner: NDG Linux Essentials",
+    penerbit: "Cisco",
+    gambar: sertifikat2,
+    link: "https://drive.google.com/file/d/1ZkhO-Q6GU9-QQMi91SIV9MtOQHiAizBw/view?usp=drive_link",
+    dad: "500",
+  },
+  {
+    id: 5,
     nama: "Partner: NDG Linux Unchated",
     penerbit: "Cisco",
     gambar: sertifikat3,
     link: "https://drive.google.com/file/d/1noe4Dipk_cHpH7XgyEQXuDgxvYR_RHFh/view?usp=sharing",
-    dad: "400",
+    dad: "600",
   },
 ];

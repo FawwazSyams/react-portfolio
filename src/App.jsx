@@ -212,6 +212,42 @@ function App() {
           ))}
         </div>
 
+        {/* === INSTAGRAM DESIGN SHOWCASE BANNER === */}
+        <div className="mt-20 relative group" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
+          <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-pink-500 rounded-3xl blur opacity-30 group-hover:opacity-60 transition-opacity duration-500"></div>
+          <div className="relative bg-zinc-800/80 backdrop-blur-xl border border-zinc-700/50 rounded-3xl p-8 sm:p-12 overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10">
+            {/* Background Pattern */}
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-pink-500/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-violet-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div className="relative z-10 flex-1 text-center md:text-left">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pink-500/10 text-pink-400 border border-pink-500/20 text-sm font-semibold mb-6">
+                <i className="ri-instagram-line text-lg"></i> Desain Grafis
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white to-zinc-400">
+                Eksplorasi Visual & Kreativitas
+              </h2>
+              <p className="text-zinc-400 text-base/loose max-w-2xl mx-auto md:mx-0">
+                Temukan eksplorasi visual saya seperti desain poster dan konten media sosial di Instagram Saka Bhayangkara Polres Cimahi di mana saya berperan sebagai graphic designer dan content creator.
+              </p>
+            </div>
+
+            <div className="relative z-10 shrink-0">
+              <a
+                href="https://www.instagram.com/sakabhayangkara.cimahi/"
+                target="_blank"
+                rel="noreferrer"
+                className="group/btn relative inline-flex items-center justify-center gap-3 px-8 py-4 font-bold text-white transition-all duration-300 bg-gradient-to-r from-violet-600 to-pink-500 rounded-2xl hover:scale-105 hover:shadow-[0_10px_40px_rgba(236,72,153,0.4)] overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-violet-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500"></div>
+                <i className="ri-instagram-fill text-2xl relative z-10"></i>
+                <span className="relative z-10 text-lg">Lihat Instagram</span>
+                <i className="ri-arrow-right-up-line text-xl relative z-10 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
         {/* === SERTIFIKAT SECTION === */}
         <div className="sertifikat mt-32 py-10" id="sertifikat">
           <h1 className="text-center text-4xl font-bold mb-2" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">Sertifikat & Penghargaan</h1>
