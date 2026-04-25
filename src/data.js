@@ -112,6 +112,7 @@ import Proyek3 from "/assets/proyek/proyek3.png";
 import Proyek4 from "/assets/proyek/proyek4.png";
 import Proyek5 from "/assets/proyek/proyek5.png";
 import Proyek6 from "/assets/proyek/proyek6.jpeg";
+import Proyek7 from "/assets/proyek/proyek7.png";
 
 export const listProyek = [
   {
@@ -126,10 +127,10 @@ export const listProyek = [
   },
   {
     id: 2,
-    gambar: Proyek2,
-    nama: "Vocabri App",
-    desk: "Aplikasi pembelajaran kosakata bahasa Inggris sederhana",
-    tools: ["Figma", "Canva", "Adobe Photoshop"],
+    gambar: Proyek7,
+    nama: "Logo Memontra Photobooth",
+    desk: "Official Logo Untuk Memontra Photobooth",
+    tools: ["Adobe Illustrator", "Adobe Photoshop"],
     linkGithub: "",
     linkWebsite: "",
     dad: "300",
@@ -174,6 +175,7 @@ export const listProyek = [
     linkWebsite: "",
     dad: "700",
   },
+
 ];
 
 import sertifikat1 from "/assets/sertifikat/sertifikat1.png";
