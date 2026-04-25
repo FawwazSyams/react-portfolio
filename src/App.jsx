@@ -1,5 +1,5 @@
 import DataImage from "./data";
-import { listTools, listProyek, listSertifikat } from "./data";
+import { listTools, listProyek, listSertifikat, listIgDesigns } from "./data";
 import ParticleBackground from "./components/ParticleBackground";
 import Navbar from "./components/Navbar";
 import { TypeAnimation } from 'react-type-animation';
@@ -219,6 +219,29 @@ function App() {
             {/* Background Pattern */}
             <div className="absolute -top-24 -right-24 w-64 h-64 bg-pink-500/20 rounded-full blur-3xl pointer-events-none"></div>
             <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-violet-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            {/* Floating Design Images */}
+            <div className="absolute inset-0 pointer-events-none opacity-[0.15] sm:opacity-20 group-hover:opacity-40 transition-opacity duration-700 z-0 overflow-hidden">
+              {listIgDesigns.map((img, index) => (
+                <img 
+                  key={index}
+                  src={img}
+                  alt="Desain Background"
+                  className={`absolute object-cover rounded-xl shadow-2xl transition-all duration-700 filter grayscale-[40%] group-hover:grayscale-0 opacity-80 group-hover:opacity-100 group-hover:scale-110
+                    /* Ukuran seragam untuk semua gambar (Mobile & Desktop) */
+                    w-24 h-36 sm:w-32 sm:h-44 lg:w-40 lg:h-56
+                    /* Posisi teratur untuk 7 gambar */
+                    ${index === 0 ? '-top-10 -left-6 sm:-left-10 rotate-[-15deg] group-hover:rotate-[-8deg] group-hover:translate-x-2' : ''}
+                    ${index === 1 ? '-top-10 -right-6 sm:-right-10 rotate-[15deg] group-hover:rotate-[8deg] group-hover:-translate-x-2' : ''}
+                    ${index === 2 ? '-bottom-10 -left-6 sm:-left-10 rotate-[-10deg] group-hover:rotate-[-5deg] group-hover:translate-x-2' : ''}
+                    ${index === 3 ? '-bottom-10 -right-6 sm:-right-10 rotate-[10deg] group-hover:rotate-[5deg] group-hover:-translate-x-2' : ''}
+                    ${index === 4 ? 'hidden md:block top-1/2 -translate-y-1/2 -left-12 lg:-left-16 rotate-[-20deg] group-hover:rotate-[-12deg]' : ''}
+                    ${index === 5 ? 'hidden md:block top-1/2 -translate-y-1/2 -right-12 lg:-right-16 rotate-[20deg] group-hover:rotate-[12deg]' : ''}
+                    ${index === 6 ? 'hidden sm:block -top-16 left-1/2 -translate-x-1/2 rotate-[-5deg] group-hover:rotate-0 group-hover:translate-y-2' : ''}
+                  `}
+                />
+              ))}
+            </div>
 
             <div className="relative z-10 flex-1 text-center md:text-left">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pink-500/10 text-pink-400 border border-pink-500/20 text-sm font-semibold mb-6">

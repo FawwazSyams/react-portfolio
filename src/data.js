@@ -224,3 +224,13 @@ export const listSertifikat = [
     dad: "600",
   },
 ];
+
+export const listIgDesigns = [
+  "/assets/design-ig/design1.png",
+  "/assets/design-ig/design2.png",
+  "/assets/design-ig/design3.png",
+  "/assets/design-ig/design4.png",
+  "/assets/design-ig/design5.png",
+  "/assets/design-ig/design6.png",
+  "/assets/design-ig/design7.png",
+];
