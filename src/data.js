@@ -113,6 +113,8 @@ import Proyek4 from "/assets/proyek/proyek4.png";
 import Proyek5 from "/assets/proyek/proyek5.png";
 import Proyek6 from "/assets/proyek/proyek6.jpeg";
 import Proyek7 from "/assets/proyek/proyek7.png";
+import Proyek9 from "/assets/proyek/proyek9.png";
+import Proyek8 from "/assets/proyek/proyek8.png";
 
 export const listProyek = [
   {
@@ -127,12 +129,12 @@ export const listProyek = [
   },
   {
     id: 2,
-    gambar: Proyek7,
-    nama: "Logo Memontra Photobooth",
-    desk: "Official Logo Untuk Memontra Photobooth",
-    tools: ["Adobe Illustrator", "Adobe Photoshop"],
-    linkGithub: "",
-    linkWebsite: "",
+    gambar: Proyek9,
+    nama: "Website Memontra Booth",
+    desk: "Aplikasi penyewaan photobooth berbasis website",
+    tools: ["React JS", "Laravel", "MySQL"],
+    linkGithub: "https://github.com/FawwazSyams/memontra-booth.git",
+    linkWebsite: "https://memontrabooth.vercel.app/",
     dad: "300",
   },
   {
@@ -167,12 +169,12 @@ export const listProyek = [
   },
   {
     id: 6,
-    gambar: Proyek6,
-    nama: "Sistem API Event Kampus",
-    desk: "Sistem API event kampus yang dibuat untuk memudahkan pengguna dalam mengelola event kampus menggunakan Laravel",
-    tools: ["Laravel", "PHP", "MYSQL"],
-    linkGithub: "https://github.com/FawwazSyams/api-event-kampus.git",
-    linkWebsite: "",
+    gambar: Proyek8,
+    nama: "Website PKS Muda Kota Cimahi",
+    desk: "Website informasi kepemudaan PKS Muda Kota Cimahi",
+    tools: ["React JS", "Laravel", "MySQL"],
+    linkGithub: "https://github.com/FawwazSyams/pks-muda-kota-cimahi.git",
+    linkWebsite: "https://pks-muda-kota-cimahi.vercel.app/",
     dad: "700",
   },
 
