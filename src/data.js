@@ -115,16 +115,17 @@ import Proyek6 from "/assets/proyek/proyek6.jpeg";
 import Proyek7 from "/assets/proyek/proyek7.png";
 import Proyek9 from "/assets/proyek/proyek9.png";
 import Proyek8 from "/assets/proyek/proyek8.png";
+import Proyek10 from "/assets/proyek/proyek10.png";
 
 export const listProyek = [
   {
     id: 1,
-    gambar: Proyek1,
-    nama: "Sistem Informasi Klinik",
-    desk: "Sebuah Sistem informasi klinik sederhana yang dibuat menggunakan PHP native dan MySQL",
-    tools: ["HTML", "CSS", "PHP", "MYSQL", "Javascript"],
+    gambar: Proyek10,
+    nama: "Website MG Care Ambulance",
+    desk: "Website profil perusahaan layanan ambulance yang terintegrasi Whatsapp dan telepon",
+    tools: ["Next JS", "Tailwind"],
     linkGithub: "",
-    linkWebsite: "",
+    linkWebsite: "https://mgcareambulance.com",
     dad: "200",
   },
   {
