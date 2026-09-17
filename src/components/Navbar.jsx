@@ -15,7 +15,7 @@ export default function Navbar() {
                     <a href="/#sertifikat" className="text-sm font-medium text-zinc-300 hover:text-violet-400 transition-colors">Sertifikat</a>
                     <a href="/#kontak" className="text-sm font-medium text-zinc-300 hover:text-violet-400 transition-colors">Kontak</a>
                     {/* Link ke subdomain discuss (sementara menggunakan route /discuss untuk demo) */}
-                    <a href="/discuss" className="text-sm font-medium px-4 py-2 bg-violet-600/20 text-violet-400 border border-violet-500/30 rounded-full hover:bg-violet-600 hover:text-white transition-all shadow-[0_0_15px_rgba(139,92,246,0.15)]">Discuss</a>
+                    <a href="https://discuss.syamsdev.id" className="text-sm font-medium px-4 py-2 bg-violet-600/20 text-violet-400 border border-violet-500/30 rounded-full hover:bg-violet-600 hover:text-white transition-all shadow-[0_0_15px_rgba(139,92,246,0.15)]">Discuss</a>
                 </div>
 
             </div>
