@@ -4,6 +4,7 @@ import ParticleBackground from "./components/ParticleBackground";
 import Navbar from "./components/Navbar";
 import { TypeAnimation } from 'react-type-animation';
 import Tilt from 'react-parallax-tilt';
+import Discuss from "./pages/Discuss";
 
 const openInstagram = (username) => {
   const appLink = `instagram://user?username=${username}`;
@@ -15,6 +16,13 @@ const openInstagram = (username) => {
     window.location.href = webLink;
   }, 1500);
 };
+
+const isDiscuss =
+  window.location.hostname === "discuss.syamsdev.id";
+
+if (isDiscuss) {
+  return <Discuss />;
+}
 
 function App() {
   return (
