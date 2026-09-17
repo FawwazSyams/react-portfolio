@@ -17,14 +17,14 @@ const openInstagram = (username) => {
   }, 1500);
 };
 
-const isDiscuss =
-  window.location.hostname === "discuss.syamsdev.id";
-
-if (isDiscuss) {
-  return <Discuss />;
-}
 
 function App() {
+  const isDiscuss =
+    window.location.hostname === "discuss.syamsdev.id";
+
+  if (isDiscuss) {
+    return <Discuss />;
+  }
   return (
     <div className="relative min-h-screen bg-transparent overflow-x-hidden">
       <div className="fixed inset-0 z-[-1]">
