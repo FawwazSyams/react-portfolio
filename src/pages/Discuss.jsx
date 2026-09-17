@@ -9,8 +9,6 @@ export default function Discuss() {
       <div className="fixed inset-0 z-[-1]">
         <ParticleBackground />
       </div>
-      
-      <Navbar />
 
       <main className="relative z-10 container mx-auto px-4 pt-32 pb-20 max-w-4xl">
         {/* Header Artikel */}
@@ -21,7 +19,7 @@ export default function Discuss() {
           <h1 className="text-4xl md:text-5xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-cyan-300 leading-tight">
             Memahami React 19: Era Baru Pengembangan Web dengan Hooks Server
           </h1>
-          
+
           <div className="flex items-center gap-4 text-zinc-400 text-sm">
             <div className="flex items-center gap-2">
               <img src="https://ui-avatars.com/api/?name=Fawwaz&background=random" alt="Author" className="w-8 h-8 rounded-full border border-zinc-700 bg-zinc-800 object-cover" />
@@ -37,9 +35,9 @@ export default function Discuss() {
         {/* Gambar Ilustrasi */}
         <div className="w-full h-[400px] mb-12 rounded-3xl overflow-hidden border border-zinc-700/50 shadow-2xl relative animate__animated animate__fadeIn group">
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent z-10 opacity-60"></div>
-          <img 
-            src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=1200&auto=format&fit=crop" 
-            alt="React JS 19 Illustration" 
+          <img
+            src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=1200&auto=format&fit=crop"
+            alt="React JS 19 Illustration"
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
           <div className="absolute bottom-4 right-4 z-20 text-xs text-zinc-400 bg-zinc-900/80 px-2 py-1 rounded">
@@ -64,14 +62,14 @@ export default function Discuss() {
           <p className="leading-relaxed mb-4">
             Sebelumnya, jika kita tidak menggunakan framework seperti Next.js, mengambil data di komponen React adalah hal yang merepotkan dan rentan bug (seperti race condition). Di React 19, kita diberikan <code>use</code> API yang dapat mengkonsumsi Promise secara langsung di dalam render komponen.
           </p>
-          
+
           <div className="bg-zinc-900 border border-zinc-700 rounded-xl p-6 mb-8 shadow-inner overflow-x-auto font-mono text-sm">
             <pre className="text-zinc-300">
-              <span className="text-pink-400">import</span> {'{ use }'} <span className="text-pink-400">from</span> <span className="text-green-300">'react'</span>;<br/><br/>
-              <span className="text-violet-400">function</span> <span className="text-blue-300">Comments</span>({'{ commentsPromise }'}) {'{'}<br/>
-              {'  '}<span className="text-zinc-500">// React akan melakukan suspend hingga promise ini selesai</span><br/>
-              {'  '}<span className="text-violet-400">const</span> comments = <span className="text-blue-300">use</span>(commentsPromise);<br/>
-              {'  '}<span className="text-pink-400">return</span> comments.<span className="text-blue-300">map</span>(comment {'=>'} {'<p key={comment.id}>{comment.text}</p>'});<br/>
+              <span className="text-pink-400">import</span> {'{ use }'} <span className="text-pink-400">from</span> <span className="text-green-300">'react'</span>;<br /><br />
+              <span className="text-violet-400">function</span> <span className="text-blue-300">Comments</span>({'{ commentsPromise }'}) {'{'}<br />
+              {'  '}<span className="text-zinc-500">// React akan melakukan suspend hingga promise ini selesai</span><br />
+              {'  '}<span className="text-violet-400">const</span> comments = <span className="text-blue-300">use</span>(commentsPromise);<br />
+              {'  '}<span className="text-pink-400">return</span> comments.<span className="text-blue-300">map</span>(comment {'=>'} {'<p key={comment.id}>{comment.text}</p>'});<br />
               {'}'}
             </pre>
           </div>
@@ -121,8 +119,7 @@ export default function Discuss() {
           </div>
         </div>
       </main>
-      
-      <Footer />
+
     </div>
   );
 }
