@@ -21,6 +21,7 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-parallax-tilt": "^1.7.319",
+    "react-router-dom": "^7.18.4",
     "react-type-animation": "^3.2.0",
     "remixicon": "^4.6.0",
     "tailwindcss": "^4.1.11"

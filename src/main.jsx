@@ -12,12 +12,18 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 AOS.init();
 
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Discuss from './pages/Discuss.jsx';
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <div className="container mx-auto">
-      <Navbar />
-      <App />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <div className="container mx-auto">
+        <Routes>
+          <Route path="/" element={<><App /><Footer /></>} />
+          <Route path="/discuss" element={<Discuss />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   </StrictMode>,
 );
