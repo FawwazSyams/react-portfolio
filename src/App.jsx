@@ -90,7 +90,7 @@ export default function App() {
               Membangun aplikasi yang fungsional, dirancang dengan ketelitian visual.
             </h1>
 
-            <p className="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-2xl mb-8">
+            <p className="text-base sm:text-lg text-zinc-400 text-justify leading-relaxed max-w-2xl mb-8">
               Saya <strong className="text-zinc-200 font-semibold">Fawwaz Muhammad Syams</strong>, mahasiswa Teknik Informatika di Politeknik TEDC Bandung. Berfokus pada pengembangan aplikasi modern serta eksplorasi desain grafis dan editorial brand identity.
             </p>
 
@@ -128,7 +128,7 @@ export default function App() {
               </div>
               <div>
                 <p className="text-2xl sm:text-3xl font-bold text-white font-mono">TEDC</p>
-                <p className="text-xs text-zinc-400 mt-1">Teknik Informatika Bandung</p>
+                <p className="text-xs text-zinc-400 mt-1">Teknik Informatika</p>
               </div>
               <div>
                 <p className="text-2xl sm:text-3xl font-bold text-white font-mono">2 Thn</p>
