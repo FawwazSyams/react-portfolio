@@ -96,7 +96,7 @@ export default function Navbar() {
           ))}
           <div className="pt-2">
             <a
-              href="/discuss"
+              href="/Discuss"
               onClick={() => setIsOpen(false)}
               className="block text-center w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-lg text-sm transition-colors">
               Mari Bicara
