@@ -21,9 +21,6 @@ export default function Discuss() {
 
         {/* Header Artikel */}
         <header className="mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-900 border border-zinc-800 text-xs font-mono text-indigo-400 mb-5">
-            <i className="ri-article-line"></i> Catatan & Analisis Web
-          </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-6">
             Memahami React 19: Paradigma Baru Penanganan Asinkron dan Formulir
           </h1>
@@ -74,7 +71,7 @@ export default function Discuss() {
 
           <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-5 font-mono text-xs sm:text-sm text-zinc-300 overflow-x-auto shadow-inner">
             <pre>
-{`import { use } from 'react';
+              {`import { use } from 'react';
 
 function Komentar({ commentsPromise }) {
   // React akan suspend sampai promise selesai diproses
