@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -6,7 +7,18 @@ export default function Discuss() {
     <div className="relative min-h-screen bg-[#0b0f17] text-zinc-100 overflow-x-hidden">
       <Navbar />
 
-      <main className="container mx-auto px-4 sm:px-6 pt-36 pb-20 max-w-4xl">
+      <main className="container mx-auto px-4 sm:px-6 pt-32 pb-20 max-w-4xl">
+        {/* Back Link Breadcrumb */}
+        <div className="mb-6">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 text-xs font-semibold text-zinc-400 hover:text-indigo-400 transition-colors px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800/80"
+          >
+            <i className="ri-arrow-left-line"></i>
+            <span>Kembali ke Halaman Portfolio</span>
+          </Link>
+        </div>
+
         {/* Header Artikel */}
         <header className="mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-900 border border-zinc-800 text-xs font-mono text-indigo-400 mb-5">
@@ -102,6 +114,33 @@ function Komentar({ commentsPromise }) {
             React 19 mematangkan alur kerja modern: mengurangi kode perantara yang berulang dan memberi ruang lebih besar bagi pengembang untuk berfokus pada kualitas interaksi antarmuka serta arsitektur data.
           </p>
         </article>
+
+        {/* Diskusi & Hubungi */}
+        <div className="mt-16 pt-10 border-t border-zinc-800">
+          <div className="p-8 rounded-2xl bg-zinc-900/70 border border-zinc-800 text-center max-w-xl mx-auto space-y-4">
+            <div className="w-12 h-12 rounded-full bg-indigo-600/20 text-indigo-400 mx-auto flex items-center justify-center text-2xl">
+              <i className="ri-chat-smile-2-line"></i>
+            </div>
+            <h3 className="text-xl font-bold text-white">Ingin Berdiskusi Lebih Lanjut?</h3>
+            <p className="text-sm text-zinc-400 leading-relaxed">
+              Punya ide, pertanyaan mengenai pengembangan web, atau tawaran kolaborasi proyek? Mari bertukar pikiran secara langsung.
+            </p>
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+              <a
+                href="/#kontak"
+                className="px-5 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs transition-colors"
+              >
+                Kirim Pesan ke Fawwaz
+              </a>
+              <Link
+                to="/"
+                className="px-5 py-2.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 font-semibold text-xs transition-colors"
+              >
+                Lihat Portfolio
+              </Link>
+            </div>
+          </div>
+        </div>
       </main>
 
       <Footer />
