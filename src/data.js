@@ -6,7 +6,7 @@ const Image = {
 
 export default Image;
 
-import Tools1 from "/assets/tools/vscode.png";
+import Tools1 from "/assets/tools/laravel.png";
 import Tools2 from "/assets/tools/reactjs.png";
 import Tools3 from "/assets/tools/php.png";
 import Tools4 from "/assets/tools/tailwind.png";
@@ -23,8 +23,8 @@ export const listTools = [
   {
     id: 1,
     gambar: Tools1,
-    nama: "Visual Studio Code",
-    ket: "Code Editor",
+    nama: "Laravel",
+    ket: "Backend Framework",
     dad: "100",
   },
   {

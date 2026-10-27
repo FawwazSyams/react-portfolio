@@ -58,7 +58,7 @@ export default function App() {
   // Group tools by domain for clarity
   const toolCategories = [
     { name: "Frontend", items: ["React JS", "Tailwind CSS", "Bootstrap", "Javascript"] },
-    { name: "Backend & Data", items: ["PHP", "Node JS", "Visual Studio Code", "Github"] },
+    { name: "Backend & Data", items: ["PHP", "Laravel", "Node JS", "Github"] },
     { name: "Design & Creative", items: ["Figma", "Adobe Illustrator", "Photoshop", "canva"] },
   ];
 
@@ -104,7 +104,7 @@ export default function App() {
               </a>
 
               <a
-                href="/CV_FawwazMuhammadSyams.pdf"
+                href="/CV_Fawwaz_Muhammad_Syams.pdf"
                 download="CV_Fawwaz_Muhammad_Syams.pdf"
                 className="px-6 py-3 rounded-lg bg-zinc-900/90 hover:bg-zinc-800 text-zinc-200 border border-zinc-700/80 font-semibold text-sm transition-colors flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
               >
@@ -168,7 +168,7 @@ export default function App() {
               </h2>
             </div>
 
-            <div className="lg:col-span-8 space-y-6 text-zinc-300 text-base leading-relaxed">
+            <div className="lg:col-span-8 space-y-6 text-zinc-300 text-base text-justify leading-relaxed">
               <p>
                 Bagi saya, web development bukan hanya perkara menyusun komponen hingga berfungsi, melainkan memastikan antarmuka terasa intuitif dan nyaman digunakan. Latar belakang saya dalam desain grafis memberikan perspektif unik saat merancang arsitektur halaman, tipografi, dan hierarki informasi.
               </p>
