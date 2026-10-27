@@ -187,6 +187,7 @@ import sertifikat3 from "/assets/sertifikat/sertifikat3.png";
 import sertifikat4 from "/assets/sertifikat/sertifikat4.png";
 import sertifikat5 from "/assets/sertifikat/sertifikat5.png";
 import sertifikat6 from "/assets/sertifikat/sertifikat6.png";
+import sertifikat7 from "/assets/sertifikat/sertifikat7.png";
 
 export const listSertifikat = [
   {
@@ -208,7 +209,7 @@ export const listSertifikat = [
   {
     id: 3,
     nama: "Pemrograman Web Dasar",
-    penerbit: "Dicoding",
+    penerbit: "Dicoding Indonesia",
     gambar: sertifikat5,
     link: "https://drive.google.com/file/d/138zKWplY2lO55xkUDjsnvIPd_YigfurR/view?usp=sharing",
     dad: "400",
@@ -231,20 +232,62 @@ export const listSertifikat = [
   },
   {
     id: 6,
-    nama: "Partner: NDG Linux Unchated",
-    penerbit: "Cisco",
-    gambar: sertifikat2,
-    link: "https://drive.google.com/file/d/1noe4Dipk_cHpH7XgyEQXuDgxvYR_RHFh/view?usp=sharing",
+    nama: "Virtual Machine Fundamental",
+    penerbit: "Aguna Course",
+    gambar: sertifikat7,
+    link: "https://drive.google.com/file/d/1gz-4jpNcVBWxQLvo8OmZgpgrDX728pUs/view?usp=sharing",
     dad: "700",
   },
 ];
 
 export const listIgDesigns = [
-  "/assets/design-ig/design1.png",
-  "/assets/design-ig/design2.png",
-  "/assets/design-ig/design3.png",
-  "/assets/design-ig/design4.png",
-  "/assets/design-ig/design5.png",
-  "/assets/design-ig/design6.png",
-  "/assets/design-ig/design7.png",
+  {
+    id: 1,
+    src: "/assets/design-ig/design1.png",
+    title: "Poster Kegiatan Saka Bhayangkara",
+    kategori: "Poster & Publikasi",
+    instansi: "Saka Bhayangkara Polres Cimahi",
+  },
+  {
+    id: 2,
+    src: "/assets/design-ig/design2.png",
+    title: "Informasi Publik & Edukasi",
+    kategori: "Media Sosial",
+    instansi: "Saka Bhayangkara Polres Cimahi",
+  },
+  {
+    id: 3,
+    src: "/assets/design-ig/design3.png",
+    title: "Pamflet Publikasi Protokol",
+    kategori: "Pamflet Acara",
+    instansi: "Protokol Kwarcab KBB",
+  },
+  {
+    id: 4,
+    src: "/assets/design-ig/design4.png",
+    title: "Konten Feed Kreatif",
+    kategori: "Branding Visual",
+    instansi: "Saka Bhayangkara Polres Cimahi",
+  },
+  {
+    id: 5,
+    src: "/assets/design-ig/design5.png",
+    title: "Dokumentasi & Visual Media",
+    kategori: "Desain Informasi",
+    instansi: "Protokol Kwarcab KBB",
+  },
+  {
+    id: 6,
+    src: "/assets/design-ig/design6.png",
+    title: "Poster Peringatan Hari Besar",
+    kategori: "Poster Editorial",
+    instansi: "Saka Bhayangkara Polres Cimahi",
+  },
+  {
+    id: 7,
+    src: "/assets/design-ig/design7.png",
+    title: "Banner Kegiatan Resmi",
+    kategori: "Banner & Display",
+    instansi: "Protokol Kwarcab KBB",
+  },
 ];

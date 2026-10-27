@@ -1,24 +1,109 @@
+import { useState, useEffect } from "react";
+
 export default function Navbar() {
-    return (
-        <nav className="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-4xl">
-            <div className="bg-zinc-900/60 backdrop-blur-md border border-zinc-700 rounded-full px-6 py-3 flex items-center justify-between shadow-lg">
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-                <a href="/#beranda" className="text-xl font-extrabold tracking-wide">
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-cyan-400">Syams</span>
-                    <span className="text-white">Dev</span>
-                </a>
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-                <div className="hidden sm:flex items-center gap-8">
-                    <a href="/#beranda" className="text-sm font-medium text-zinc-300 hover:text-violet-400 transition-colors">Beranda</a>
-                    <a href="/#tentang" className="text-sm font-medium text-zinc-300 hover:text-violet-400 transition-colors">Tentang</a>
-                    <a href="/#proyek" className="text-sm font-medium text-zinc-300 hover:text-violet-400 transition-colors">Proyek</a>
-                    <a href="/#sertifikat" className="text-sm font-medium text-zinc-300 hover:text-violet-400 transition-colors">Sertifikat</a>
-                    <a href="/#kontak" className="text-sm font-medium text-zinc-300 hover:text-violet-400 transition-colors">Kontak</a>
-                    {/* Link ke subdomain discuss (sementara menggunakan route /discuss untuk demo) */}
-                    <a href="https://discuss.syamsdev.id" className="text-sm font-medium px-4 py-2 bg-violet-600/20 text-violet-400 border border-violet-500/30 rounded-full hover:bg-violet-600 hover:text-white transition-all shadow-[0_0_15px_rgba(139,92,246,0.15)]">Discuss</a>
-                </div>
+  // Close mobile menu on Escape key (R-32 Keyboard Accessibility)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape" && isOpen) {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen]);
 
-            </div>
+  const navLinks = [
+    { name: "Tentang", href: "#tentang" },
+    { name: "Tech Stack", href: "#stack" },
+    { name: "Proyek", href: "#proyek" },
+    { name: "Desain Grafis", href: "#desain" },
+    { name: "Sertifikat", href: "#sertifikat" },
+    { name: "Kontak", href: "#kontak" },
+  ];
+
+  return (
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+        ? "bg-[#0b0f17]/90 backdrop-blur-md border-b border-zinc-800/80 shadow-md py-3.5"
+        : "bg-transparent py-5"
+        }`}
+    >
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl flex items-center justify-between">
+        {/* Logo / Brand */}
+        <a
+          href="/"
+          className="group flex items-center gap-2.5 text-lg font-bold tracking-tight text-zinc-100 hover:text-white transition-colors"
+        >
+          <span className="font-bold">
+            Syams<span className="text-indigo-400 font-mono">Dev</span>
+          </span>
+        </a>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-7">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className="text-sm font-medium text-zinc-300 hover:text-zinc-100 transition-colors py-1 relative"
+            >
+              {link.name}
+            </a>
+          ))}
+          <a
+            href="/discuss"
+            className="text-xs font-semibold px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg transition-colors shadow-sm"
+          >
+            Mari Bicara
+          </a>
         </nav>
-    );
+
+        {/* Mobile Hamburger Toggle (R-03 & R-26: fully functional) */}
+        <button
+          type="button"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label={isOpen ? "Tutup menu navigasi" : "Buka menu navigasi"}
+          aria-expanded={isOpen}
+          className="md:hidden p-2 rounded-lg text-zinc-300 hover:text-white hover:bg-zinc-800 border border-zinc-700/60 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        >
+          <i className={isOpen ? "ri-close-line text-xl" : "ri-menu-4-line text-xl"}></i>
+        </button>
+      </div>
+
+      {/* Mobile Drawer Menu */}
+      {isOpen && (
+        <div className="md:hidden bg-[#0d121c] border-b border-zinc-800 px-4 pt-3 pb-6 space-y-2 animate__animated animate__fadeIn">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              onClick={() => setIsOpen(false)}
+              className="block px-3 py-2.5 rounded-lg text-base font-medium text-zinc-200 hover:bg-zinc-800/80 hover:text-white transition-colors"
+            >
+              {link.name}
+            </a>
+          ))}
+          <div className="pt-2">
+            <a
+              href="/discuss"
+              onClick={() => setIsOpen(false)}
+              className="block text-center w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-lg text-sm transition-colors">
+              Mari Bicara
+            </a>
+          </div>
+        </div>
+      )}
+    </header>
+  );
 }

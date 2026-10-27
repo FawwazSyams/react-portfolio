@@ -2,32 +2,67 @@
 
 @layer base {
   body {
-    font-family: "Poppins", sans-serif;
+    font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #0b0f17;
+    color: #f1f5f9;
+  }
+
+  code, pre, .font-mono {
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  /* R-32 Keyboard Accessibility: Ensure clear focus outline */
+  :focus-visible {
+    outline: 2px solid #6366f1;
+    outline-offset: 2px;
   }
 }
 
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
-@keyframes scroll {
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0f17;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+@keyframes ticker {
   0% {
     transform: translateX(0);
   }
-
   100% {
-    transform: translateX(calc(-250px * 7));
+    transform: translateX(-50%);
   }
-
-
 }
 
-.animate-scroll {
-  animation: scroll 30s linear infinite;
+.animate-ticker {
   display: flex;
-  width: calc(250px * 14);
+  width: max-content;
+  animation: ticker 35s linear infinite;
 }
 
-.animate-scroll:hover {
+.animate-ticker:hover {
   animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker {
+    animation: none;
+    overflow-x: auto;
+  }
 }

@@ -1,422 +1,724 @@
-import DataImage from "./data";
-import { listTools, listProyek, listSertifikat, listIgDesigns } from "./data";
-import ParticleBackground from "./components/ParticleBackground";
+import { useState, useEffect } from "react";
+import DataImage, { listTools, listProyek, listSertifikat, listIgDesigns } from "./data";
 import Navbar from "./components/Navbar";
-import { TypeAnimation } from 'react-type-animation';
-import Tilt from 'react-parallax-tilt';
+import Footer from "./components/Footer";
 import Discuss from "./pages/Discuss";
 
-const openInstagram = (username) => {
-  const appLink = `instagram://user?username=${username}`;
-  const webLink = `https://www.instagram.com/${username}/`;
+export default function App() {
+  const [selectedDesign, setSelectedDesign] = useState(null);
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [formState, setFormState] = useState({
+    nama: "",
+    email: "",
+    pesan: "",
+    status: "idle", // 'idle' | 'submitting' | 'success' | 'error'
+  });
 
-  window.location.href = appLink;
-
-  setTimeout(() => {
-    window.location.href = webLink;
-  }, 1500);
-};
-
-
-function App() {
-  const isDiscuss =
-    window.location.hostname === "discuss.syamsdev.id";
-
+  const isDiscuss = window.location.hostname === "discuss.syamsdev.id";
   if (isDiscuss) {
     return <Discuss />;
   }
+
+  // Handle ESC key for modal
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape" && selectedDesign) {
+        setSelectedDesign(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedDesign]);
+
+  // Form submit handler with interactive feedback
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    setFormState((prev) => ({ ...prev, status: "submitting" }));
+
+    try {
+      const formData = new FormData(e.target);
+      const response = await fetch("https://formsubmit.co/ajax/fawwazsyams04@email.com", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        setFormState({ nama: "", email: "", pesan: "", status: "success" });
+      } else {
+        setFormState((prev) => ({ ...prev, status: "error" }));
+      }
+    } catch {
+      setFormState((prev) => ({ ...prev, status: "error" }));
+    }
+  };
+
+  // Group tools by domain for clarity
+  const toolCategories = [
+    { name: "Frontend", items: ["React JS", "Tailwind CSS", "Bootstrap", "Javascript"] },
+    { name: "Backend & Data", items: ["PHP", "Node JS", "Visual Studio Code", "Github"] },
+    { name: "Design & Creative", items: ["Figma", "Adobe Illustrator", "Photoshop", "canva"] },
+  ];
+
+  // Filter projects if needed, or split into flagship + others
+  const flagshipProject = listProyek.find((p) => p.id === 1) || listProyek[0];
+  const supportingProjects = listProyek.filter((p) => p.id !== flagshipProject.id);
+
   return (
-    <div className="relative min-h-screen bg-transparent overflow-x-hidden">
-      <div className="fixed inset-0 z-[-1]">
-        <ParticleBackground />
-      </div>
+    <div className="relative min-h-screen bg-[#0b0f17] text-zinc-100 overflow-x-hidden">
       <Navbar />
-      <div className="relative z-10 container mx-auto px-4">
 
-        {/* === HERO SECTION === */}
-        <div id="beranda" className="hero grid md:grid-cols-2 items-center pt-36 md:pt-24 pb-10 xl:gap-0 gap-6 grid-cols-1 min-h-screen">
-          <div className="animate__animated animate__fadeInUp">
-            <div className="flex items-center gap-3 mb-6 bg-zinc-800/80 backdrop-blur-sm w-fit p-4 rounded-2xl" loading="lazy">
-              <img src={DataImage.HeroImage} alt="Hero Image" className="w-10 rounded-md" />
-              <q>Setiap baris kode adalah langkah menuju mimpi.</q>
-            </div>
-            <h1 className="text-5xl/tight font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-cyan-400">
-              Hi, Saya Fawwaz Muhammad Syams
+      <main className="container mx-auto px-4 sm:px-6 max-w-6xl">
+        {/* ========================================================
+            HERO SECTION
+            Editorial, grounded, confident headline with personal story
+           ======================================================== */}
+        <section
+          id="beranda"
+          className="pt-32 sm:pt-40 pb-20 md:pb-28 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
+        >
+          <div className="lg:col-span-7 flex flex-col justify-center">
+            {/* Status Indicator */}
+            {/* <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-xs text-zinc-300 w-fit mb-6 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>Terbuka untuk kolaborasi proyek dan peluang magang</span>
+            </div> */}
+
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.15] mb-6">
+              Membangun aplikasi yang fungsional, dirancang dengan ketelitian visual.
             </h1>
-            <div className="text-2xl font-semibold mb-6 text-violet-400 h-10">
-              <TypeAnimation
-                sequence={[
-                  'Fullstack Web Developer',
-                  1500,
-                  'React & Laravel Enthusiast',
-                  1500,
-                  'Data Science & UI/UX',
-                  1500,
-                ]}
-                wrapper="span"
-                speed={50}
-                repeat={Infinity}
-              />
-            </div>
 
-            <p className="text-base/loose mb-6 opacity-50">
-              Saya mempunyai ketertarikan dalam bidang programming dan design, terutama pada
-              pembuatan website, desain poster, pamflet, serta Banner. Saya juga mahasiswa aktif di
-              Politeknik TEDC Bandung jurusan Teknik Informatika.
+            <p className="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-2xl mb-8">
+              Saya <strong className="text-zinc-200 font-semibold">Fawwaz Muhammad Syams</strong>, mahasiswa Teknik Informatika di Politeknik TEDC Bandung. Berfokus pada pengembangan aplikasi modern serta eksplorasi desain grafis dan editorial brand identity.
             </p>
-            <div className="flex items-center sm:gap-4 gap-2">
-              <a href="#proyek" className="bg-violet-700 text-white py-3 px-6 rounded-full hover:bg-violet-600 transition-all hover:shadow-[0_0_20px_rgba(109,40,217,0.5)] flex items-center gap-2 font-semibold">
-                Lihat Proyek <i className="ri-arrow-down-fill ri-lg"></i>
+
+            {/* Deliberate Action Buttons */}
+            <div className="flex flex-wrap items-center gap-4">
+              <a
+                href="#proyek"
+                className="px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              >
+                Lihat Karya Terpilih
               </a>
 
               <a
                 href="/CV_FawwazMuhammadSyams.pdf"
-                download="CV_Fawwa_Muhammad_Syams.pdf"
-                className="border-2 border-zinc-600 text-zinc-300 py-3 px-6 rounded-full hover:border-violet-500 hover:text-violet-400 transition-all flex items-center gap-2 font-semibold bg-zinc-900/50"
+                download="CV_Fawwaz_Muhammad_Syams.pdf"
+                className="px-6 py-3 rounded-lg bg-zinc-900/90 hover:bg-zinc-800 text-zinc-200 border border-zinc-700/80 font-semibold text-sm transition-colors flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
               >
-                Download CV <i className="ri-download-line ri-lg"></i>
+                <i className="ri-file-download-line text-base text-zinc-400"></i>
+                Unduh CV (PDF)
+              </a>
+
+              <a
+                href="#desain"
+                className="px-5 py-3 rounded-lg text-zinc-400 hover:text-zinc-200 text-sm font-medium transition-colors"
+              >
+                Eksplorasi Desain Grafis →
               </a>
             </div>
-          </div>
-          <div className="flex justify-center md:justify-end mt-12 md:mt-0 relative z-10" data-aos="fade-up" data-aos-delay="200">
-            <div className="relative w-[280px] sm:w-[350px] md:w-[400px]">
 
-              <div className="absolute inset-0 bg-gradient-to-l from-violet-600 to-cyan-400 blur-3xl opacity-5 rounded-full animate-pulse"></div>
-
-              <img
-                src={DataImage.HeroImage}
-                alt="Profile Fawwaz"
-                className="relative z-10 w-full object-cover rounded-3xl border border-zinc-700/50 shadow-2xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(139,92,246,0.3)]"
-                loading="lazy"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* === TENTANG SECTION === */}
-        <div className="tentang mt-32 py-10" id="tentang">
-          <div className="xl:w-2/3 lg:w-3/4 w-full mx-auto p-7 bg-zinc-800/80 backdrop-blur-sm rounded-lg" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
-            <img src={DataImage.HeroImage} alt="Image" className="w-12 rounded-md mb-10 sm:hidden" />
-            <p className="text-base/loose mb-10">
-              Hi, Perkenalkan saya Fawwaz Muhammad Syams, seorang mahasiswa aktif yang meminati Web Developer, Design
-              UI/UX dan Graphic Desgin. Saya percaya bahwa desain dan fungsionalitas harus berjalan beriringan, sehingga setiap
-              proyek yang saya kembangkan tidak hanya terlihat menarik tetapi juga memberikan pengalaman pengguna yang optimal.
-            </p>
-
-            <div className="flex items-center justify-between gap-4">
-              <img src={DataImage.HeroImage} alt="Image" className="w-12 rounded-md sm:block hidden" />
-              <div className="flex items-center gap-6">
-                <div>
-                  <h1 className="text-4xl mb-1">15<span className="text-violet-500">+</span></h1>
-                  <p>Proyek Selesai</p>
-                </div>
-                <div>
-                  <h1 className="text-4xl mb-1">2<span className="text-violet-500">+</span></h1>
-                  <p>Tahun Pengalaman</p>
-                </div>
+            {/* Quick Context Highlights */}
+            <div className="mt-12 pt-8 border-t border-zinc-800/80 grid grid-cols-3 gap-6 text-left">
+              <div>
+                <p className="text-2xl sm:text-3xl font-bold text-white font-mono">10+</p>
+                <p className="text-xs text-zinc-400 mt-1">Proyek Web & Desain</p>
+              </div>
+              <div>
+                <p className="text-2xl sm:text-3xl font-bold text-white font-mono">TEDC</p>
+                <p className="text-xs text-zinc-400 mt-1">Teknik Informatika Bandung</p>
+              </div>
+              <div>
+                <p className="text-2xl sm:text-3xl font-bold text-white font-mono">2 Thn</p>
+                <p className="text-xs text-zinc-400 mt-1">Pengalaman Praktik</p>
               </div>
             </div>
           </div>
 
-          <div className="tools mt-32">
-            <h1 className="text-4xl/snug font-bold mb-4 text-center" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-500">Tech Stack</span> & Tools
-            </h1>
-            <p className="w-full sm:w-2/3 mx-auto text-base/loose opacity-50 text-center mb-10" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" data-aos-once="true">
-              Teknologi yang saya gunakan untuk meracik antarmuka web, membangun API backend, hingga mengolah data.
-            </p>
+          {/* Profile Framing */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+            <div className="relative w-full max-w-sm">
+              <div className="relative rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 shadow-xl">
+                <img
+                  src={DataImage.HeroImage}
+                  alt="Fawwaz Muhammad Syams"
+                  className="w-full aspect-[4/5] object-cover filter contrast-[1.02]"
+                  loading="eager"
+                />
+                <div className="p-4 bg-zinc-900/95 border-t border-zinc-800/80">
+                  <p className="text-sm font-semibold text-zinc-200">Fawwaz Muhammad Syams</p>
+                  <p className="text-xs text-zinc-400">Web Developer & Graphic Designer | Bandung</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-            <div className="relative flex overflow-hidden w-full bg-zinc-900/30 py-8 rounded-2xl border border-zinc-800/50"
-              style={{
-                maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
-                WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
-              }}
-            >
-              <div className="animate-scroll whitespace-nowrap flex items-center gap-8 px-4">
-                {[...listTools, ...listTools].map((tool, index) => (
-                  <div
-                    key={`${tool.id}-${index}`}
-                    className="flex items-center gap-4 p-4 min-w-[200px] border border-zinc-700/50 rounded-xl bg-zinc-800/80 backdrop-blur-sm hover:border-violet-500/50 transition-colors shadow-lg"
-                  >
-                    <div className="bg-zinc-900 p-2 rounded-lg shadow-inner">
-                      <img src={tool.gambar} alt={tool.nama} className="w-10 h-10 object-contain" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-zinc-200">{tool.nama}</h4>
-                      <p className="text-xs text-zinc-400">{tool.ket}</p>
-                    </div>
+        {/* ========================================================
+            TENTANG SECTION (Editorial Split)
+           ======================================================== */}
+        <section id="tentang" className="py-20 border-t border-zinc-800/80">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div className="lg:col-span-4">
+              <span className="text-xs font-mono uppercase tracking-wider text-indigo-400">Tentang Saya</span>
+              <h2 className="text-3xl font-bold text-white mt-2 tracking-tight">
+                Keseimbangan antara logika kode dan kepekaan rasa.
+              </h2>
+            </div>
+
+            <div className="lg:col-span-8 space-y-6 text-zinc-300 text-base leading-relaxed">
+              <p>
+                Bagi saya, web development bukan hanya perkara menyusun komponen hingga berfungsi, melainkan memastikan antarmuka terasa intuitif dan nyaman digunakan. Latar belakang saya dalam desain grafis memberikan perspektif unik saat merancang arsitektur halaman, tipografi, dan hierarki informasi.
+              </p>
+              <p>
+                Sebagai mahasiswa di <strong className="text-white">Politeknik TEDC Bandung</strong>, saya aktif mengembangkan berbagai solusi digital: mulai dari portal profil perusahaan, sistem photobooth interaktif, eksplorasi machine learning sederhana, hingga identitas visual dan publikasi media sosial untuk komunitas serta instansi kepemudaan.
+              </p>
+
+              <div className="pt-4 grid sm:grid-cols-2 gap-4">
+                <div className="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800">
+                  <div className="flex items-center gap-2 text-indigo-400 mb-2">
+                    <i className="ri-code-s-slash-line text-lg"></i>
+                    <h3 className="font-semibold text-zinc-200 text-sm">Fullstack Development</h3>
                   </div>
-                ))}
+                  <p className="text-xs text-zinc-400 leading-normal">
+                    Fokus pada React, Next.js, Laravel, REST API, dan integrasi database relasional yang rapi dan terukur.
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-xl bg-zinc-900/60 border border-zinc-800">
+                  <div className="flex items-center gap-2 text-amber-400 mb-2">
+                    <i className="ri-palette-line text-lg"></i>
+                    <h3 className="font-semibold text-zinc-200 text-sm">Visual & Graphic Craft</h3>
+                  </div>
+                  <p className="text-xs text-zinc-400 leading-normal">
+                    Pengalaman merancang poster acara, layout editorial, dan aset media sosial menggunakan Illustrator, Photoshop, dan Figma.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* === PROYEK SECTION === */}
-        <div className="proyek mt-16 py-10" id="proyek">
-          <h1 className="text-center text-4xl font-bold mb-2" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">Proyek</h1>
-          <p className="text-base/loose text-center opacity-50" data-aos="fade-up" data-aos-delay="300" data-aos-once="true">Beberapa karya dan eksplorasi teknologi yang telah saya bangun.</p>
-        </div>
+        {/* ========================================================
+            TECH STACK & TOOLS SECTION
+           ======================================================== */}
+        <section id="stack" className="py-20 border-t border-zinc-800/80">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+            <div>
+              <span className="text-xs font-mono uppercase tracking-wider text-indigo-400">Toolkit & Penguasaan</span>
+              <h2 className="text-3xl font-bold text-white mt-2 tracking-tight">Teknologi & Instrumen Kerja</h2>
+            </div>
+            <p className="text-sm text-zinc-400 max-w-md">
+              Koleksi perangkat lunak dan library yang saya gunakan sehari-hari untuk mewujudkan ide menjadi produk nyata.
+            </p>
+          </div>
 
-        <div className="proyek-box mt-14 grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8">
-          {listProyek.map(proyek => (
-            <Tilt
-              key={proyek.id}
-              tiltMaxAngleX={10}
-              tiltMaxAngleY={10}
-              perspective={1000}
-              transitionSpeed={1000}
-              scale={1.02}
-              glareEnable={true}
-              glareMaxOpacity={0.15}
-              glarePosition="all"
-              className="h-full"
-            >
-              <div
-                className="group relative flex flex-col justify-between p-5 bg-zinc-800/60 backdrop-blur-sm border border-zinc-700 rounded-2xl overflow-hidden h-full"
-                data-aos="fade-up"
-                data-aos-duration="1000"
-                data-aos-delay={proyek.dad}
-                data-aos-once="true"
-              >
-                <div className="overflow-hidden rounded-xl mb-5">
-                  <img
-                    src={proyek.gambar}
-                    alt="Proyek Image"
-                    loading="lazy"
-                    className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
+          {/* Categorized Stack Display */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            {toolCategories.map((cat, idx) => (
+              <div key={idx} className="p-5 rounded-xl bg-zinc-900/70 border border-zinc-800">
+                <h3 className="text-sm font-semibold text-zinc-200 mb-4 pb-2 border-b border-zinc-800 flex items-center justify-between">
+                  <span>{cat.name}</span>
+                  <span className="text-xs font-mono text-zinc-400">{cat.items.length} tools</span>
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {cat.items.map((itemName, itemIdx) => {
+                    const toolObj = listTools.find((t) => t.nama.toLowerCase() === itemName.toLowerCase());
+                    return (
+                      <div
+                        key={itemIdx}
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-zinc-800/80 border border-zinc-700/60 text-xs text-zinc-200"
+                      >
+                        {toolObj && (
+                          <img src={toolObj.gambar} alt={toolObj.nama} className="w-4 h-4 object-contain" />
+                        )}
+                        <span>{itemName}</span>
+                      </div>
+                    );
+                  })}
                 </div>
+              </div>
+            ))}
+          </div>
 
-                <div className="flex-1">
-                  <h1 className="text-xl font-bold mb-3 group-hover:text-violet-400 transition-colors">{proyek.nama}</h1>
-                  <p className="text-sm/relaxed text-zinc-400 mb-6">{proyek.desk}</p>
+          {/* Clean Ticker for all tools */}
+          {/* <div
+            className="relative overflow-hidden w-full py-4 border-y border-zinc-800/80 bg-zinc-900/40"
+            style={{
+              maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+              WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+            }}
+          >
+            <div className="animate-ticker flex items-center gap-6">
+              {[...listTools, ...listTools].map((tool, index) => (
+                <div
+                  key={`${tool.id}-${index}`}
+                  className="flex items-center gap-3 px-4 py-2.5 rounded-lg bg-zinc-800/60 border border-zinc-700/60 shrink-0"
+                >
+                  <img src={tool.gambar} alt={tool.nama} className="w-5 h-5 object-contain" />
+                  <span className="text-xs font-semibold text-zinc-200 whitespace-nowrap">{tool.nama}</span>
+                  <span className="text-[10px] text-zinc-400 font-mono whitespace-nowrap">{tool.ket}</span>
                 </div>
+              ))}
+            </div>
+          </div> */}
+        </section>
 
-                <div className="flex flex-wrap gap-2 mt-auto pt-4 border-t border-zinc-700/50">
-                  {proyek.tools.map((tool, index) => (
+        {/* ========================================================
+            PROYEK SECTION (RHYTHM 3: Flagship Spotlight + Grid)
+           ======================================================== */}
+        <section id="proyek" className="py-20 border-t border-zinc-800/80">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+            <div>
+              <span className="text-xs font-mono uppercase tracking-wider text-indigo-400">Portofolio Terpilih</span>
+              <h2 className="text-3xl font-bold text-white mt-2 tracking-tight">Karya Pengembangan Web</h2>
+            </div>
+            <p className="text-sm text-zinc-400 max-w-md">
+              Aplikasi berbasis web yang dibangun untuk menyelesaikan kebutuhan pengguna nyata dan studi kasus terapan.
+            </p>
+          </div>
+
+          {/* Flagship Project Spotlight (MG Care Ambulance) */}
+          <div className="mb-12 rounded-2xl bg-zinc-900/90 border border-zinc-800 overflow-hidden grid grid-cols-1 lg:grid-cols-12 shadow-xl">
+            <div className="lg:col-span-7 overflow-hidden bg-zinc-950 relative group">
+              <img
+                src={flagshipProject.gambar}
+                alt={flagshipProject.nama}
+                className="w-full h-full min-h-[300px] lg:min-h-[420px] object-cover object-top transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-900/90 border border-zinc-700/80 text-xs font-mono text-amber-400">
+                <span className="w-2 h-2 rounded-full bg-amber-400"></span>
+                Proyek Unggulan (Live)
+              </div>
+            </div>
+
+            <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between">
+              <div>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {flagshipProject.tools.map((tool, idx) => (
                     <span
-                      className="text-xs py-1 px-3 border border-zinc-600 bg-zinc-900/50 text-zinc-300 rounded-full font-medium"
-                      key={index}
+                      key={idx}
+                      className="px-2.5 py-1 rounded-md bg-zinc-800 border border-zinc-700/70 text-xs font-mono text-zinc-300"
                     >
                       {tool}
                     </span>
                   ))}
                 </div>
-                <div className="flex items-center gap-3 mt-5">
-                  {proyek.linkGithub && (
-                    <a
-                      href={proyek.linkGithub}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex-1 flex justify-center items-center gap-2 py-2.5 bg-zinc-700/50 hover:bg-zinc-600 border border-zinc-600 rounded-xl text-sm font-semibold transition-all hover:scale-[1.02]"
-                    >
-                      <i className="ri-github-fill text-lg"></i> GitHub
-                    </a>
-                  )}
 
+                <h3 className="text-2xl font-bold text-white mb-3 tracking-tight">{flagshipProject.nama}</h3>
+                <p className="text-sm text-zinc-400 leading-relaxed mb-6">
+                  {flagshipProject.desk}. Menghadirkan antarmuka darurat yang cepat dimuat, ramah seluler, serta memberikan akses instan untuk pemesanan armada darurat dan layanan medis.
+                </p>
+
+                <div className="space-y-2 mb-6 text-xs text-zinc-400 border-t border-zinc-800 pt-4">
+                  <p className="flex items-center gap-2">
+                    <i className="ri-checkbox-circle-line text-emerald-400"></i>
+                    Optimalisasi performa & responsivitas seluler
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <i className="ri-checkbox-circle-line text-emerald-400"></i>
+                    Integrasi direct call & sistem pesan cepat WhatsApp
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 pt-4 border-t border-zinc-800">
+                {flagshipProject.linkWebsite && (
+                  <a
+                    href={flagshipProject.linkWebsite}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex-1 text-center py-2.5 px-4 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm transition-colors flex items-center justify-center gap-2"
+                  >
+                    <span>Kunjungi Website</span>
+                    <i className="ri-external-link-line text-sm"></i>
+                  </a>
+                )}
+                {flagshipProject.linkGithub && (
+                  <a
+                    href={flagshipProject.linkGithub}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="py-2.5 px-4 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 font-semibold text-sm transition-colors flex items-center gap-2"
+                  >
+                    <i className="ri-github-fill text-base"></i>
+                    <span>Source</span>
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Supporting Projects Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {supportingProjects.map((proyek) => (
+              <div
+                key={proyek.id}
+                className="rounded-xl bg-zinc-900/60 border border-zinc-800/90 overflow-hidden flex flex-col justify-between hover:border-zinc-700 transition-colors"
+              >
+                <div>
+                  <div className="aspect-[16/10] bg-zinc-950 overflow-hidden relative">
+                    <img
+                      src={proyek.gambar}
+                      alt={proyek.nama}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                    />
+                  </div>
+
+                  <div className="p-5">
+                    <div className="flex flex-wrap gap-1.5 mb-3">
+                      {proyek.tools.map((tool, idx) => (
+                        <span
+                          key={idx}
+                          className="px-2 py-0.5 rounded bg-zinc-800/80 border border-zinc-700/60 text-[11px] font-mono text-zinc-300"
+                        >
+                          {tool}
+                        </span>
+                      ))}
+                    </div>
+                    <h3 className="text-lg font-bold text-white mb-2 leading-snug">{proyek.nama}</h3>
+                    <p className="text-xs text-zinc-400 leading-relaxed line-clamp-3">{proyek.desk}</p>
+                  </div>
+                </div>
+
+                <div className="p-5 pt-0 mt-auto flex items-center gap-2.5">
                   {proyek.linkWebsite && (
                     <a
                       href={proyek.linkWebsite}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex-1 flex justify-center items-center gap-2 py-2.5 bg-violet-600/80 hover:bg-violet-500 border border-violet-500 rounded-xl text-sm font-semibold transition-all hover:scale-[1.02]"
+                      className="flex-1 py-2 px-3 rounded-lg bg-indigo-600/20 hover:bg-indigo-600 text-indigo-300 hover:text-white border border-indigo-500/30 text-xs font-semibold text-center transition-colors flex items-center justify-center gap-1.5"
                     >
-                      <i className="ri-external-link-line text-lg"></i> Live
+                      <span>Lihat Live</span>
+                      <i className="ri-external-link-line"></i>
                     </a>
                   )}
-                </div>
-              </div>
-            </Tilt>
-          ))}
-        </div>
 
-        {/* === INSTAGRAM DESIGN SHOWCASE BANNER === */}
-        <div className="mt-20 relative group" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
-          <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-pink-500 rounded-3xl blur opacity-30 group-hover:opacity-60 transition-opacity duration-500"></div>
-          <div className="relative bg-zinc-800/80 backdrop-blur-xl border border-zinc-700/50 rounded-3xl p-8 sm:p-12 overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10">
-            {/* Background Pattern */}
-            <div className="absolute -top-24 -right-24 w-64 h-64 bg-pink-500/20 rounded-full blur-3xl pointer-events-none"></div>
-            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-violet-600/20 rounded-full blur-3xl pointer-events-none"></div>
-
-            {/* Floating Design Images */}
-            <div className="absolute inset-0 pointer-events-none opacity-[0.15] sm:opacity-20 group-hover:opacity-40 transition-opacity duration-700 z-0 overflow-hidden">
-              {listIgDesigns.map((img, index) => (
-                <img
-                  key={index}
-                  src={img}
-                  alt="Desain Background"
-                  className={`absolute object-cover rounded-xl shadow-2xl transition-all duration-700 filter grayscale-[40%] group-hover:grayscale-0 opacity-80 group-hover:opacity-100 group-hover:scale-110
-                    /* Ukuran seragam untuk semua gambar (Mobile & Desktop) */
-                    w-24 h-36 sm:w-32 sm:h-44 lg:w-40 lg:h-56
-                    /* Posisi teratur untuk 7 gambar */
-                    ${index === 0 ? '-top-10 -left-6 sm:-left-10 rotate-[-15deg] group-hover:rotate-[-8deg] group-hover:translate-x-2' : ''}
-                    ${index === 1 ? '-top-10 -right-6 sm:-right-10 rotate-[15deg] group-hover:rotate-[8deg] group-hover:-translate-x-2' : ''}
-                    ${index === 2 ? '-bottom-10 -left-6 sm:-left-10 rotate-[-10deg] group-hover:rotate-[-5deg] group-hover:translate-x-2' : ''}
-                    ${index === 3 ? '-bottom-10 -right-6 sm:-right-10 rotate-[10deg] group-hover:rotate-[5deg] group-hover:-translate-x-2' : ''}
-                    ${index === 4 ? 'hidden md:block top-1/2 -translate-y-1/2 -left-12 lg:-left-16 rotate-[-20deg] group-hover:rotate-[-12deg]' : ''}
-                    ${index === 5 ? 'hidden md:block top-1/2 -translate-y-1/2 -right-12 lg:-right-16 rotate-[20deg] group-hover:rotate-[12deg]' : ''}
-                    ${index === 6 ? 'hidden sm:block -top-16 left-1/2 -translate-x-1/2 rotate-[-5deg] group-hover:rotate-0 group-hover:translate-y-2' : ''}
-                  `}
-                />
-              ))}
-            </div>
-
-            <div className="relative z-10 flex-1 text-center md:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pink-500/10 text-pink-400 border border-pink-500/20 text-sm font-semibold mb-6">
-                <i className="ri-instagram-line text-lg"></i> Desain Grafis
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white to-zinc-400">
-                Eksplorasi Visual & Kreativitas
-              </h2>
-              <p className="text-zinc-400 text-base/loose max-w-2xl mx-auto md:mx-0">
-                Temukan eksplorasi visual saya seperti desain poster dan konten media sosial di Instagram Saka Bhayangkara Polres Cimahi dan Protokol Kwarcab KBB di mana saya berperan sebagai graphic designer dan content creator.
-              </p>
-            </div>
-
-            <div className="relative z-10 shrink-0 flex flex-col gap-4">
-              <button
-                onClick={() => openInstagram("sakabhayangkara.cimahi")}
-                className="group/btn relative inline-flex items-center justify-center gap-3 px-6 py-3 font-bold text-white transition-all duration-300 bg-gradient-to-r from-violet-600 to-pink-500 rounded-2xl hover:scale-105 hover:shadow-[0_10px_40px_rgba(236,72,153,0.4)] overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-violet-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500"></div>
-                <i className="ri-instagram-fill text-xl relative z-10"></i>
-                <span className="relative z-10 text-base whitespace-nowrap">Saka Bhayangkara</span>
-                <i className="ri-arrow-right-up-line text-lg relative z-10 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform"></i>
-              </button>
-              <button
-                onClick={() => openInstagram("protokolkwarcabkbb")}
-                className="group/btn relative inline-flex items-center justify-center gap-3 px-6 py-3 font-bold text-white transition-all duration-300 bg-gradient-to-r from-violet-600 to-pink-500 rounded-2xl hover:scale-105 hover:shadow-[0_10px_40px_rgba(236,72,153,0.4)] overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-violet-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500"></div>
-                <i className="ri-instagram-fill text-xl relative z-10"></i>
-                <span className="relative z-10 text-base whitespace-nowrap">Protokol Kwarcab</span>
-                <i className="ri-arrow-right-up-line text-lg relative z-10 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* === SERTIFIKAT SECTION === */}
-        <div className="sertifikat mt-32 py-10" id="sertifikat">
-          <h1 className="text-center text-4xl font-bold mb-2" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">Sertifikat & Penghargaan</h1>
-          <p className="text-base/loose text-center opacity-50 mb-14" data-aos="fade-up" data-aos-delay="300" data-aos-once="true">Validasi keahlian dan pencapaian akademik maupun profesional.</p>
-
-          <div className="sertifikat-box grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8">
-            {listSertifikat.map(sertifikat => (
-              <div
-                key={sertifikat.id}
-                className="group relative flex flex-col p-5 bg-zinc-800/60 backdrop-blur-sm border border-zinc-700 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(139,92,246,0.15)] hover:border-violet-500/50"
-                data-aos="fade-up"
-                data-aos-duration="1000"
-                data-aos-delay={sertifikat.dad}
-                data-aos-once="true"
-              >
-                {/* Gambar Sertifikat */}
-                <div className="overflow-hidden rounded-xl mb-5 relative bg-zinc-900">
-                  <div className="absolute inset-0 bg-violet-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none"></div>
-                  <img
-                    src={sertifikat.gambar}
-                    alt="Sertifikat"
-                    loading="lazy"
-                    className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-
-                {/* Detail Sertifikat */}
-                <div className="flex-1 flex flex-col justify-between">
-                  <div>
-                    <h1 className="text-lg font-bold mb-2 group-hover:text-violet-400 transition-colors leading-snug">{sertifikat.nama}</h1>
-                    <p className="text-sm text-zinc-400 mb-6 font-medium flex items-center gap-2">
-                      <i className="ri-award-fill text-violet-500"></i> {sertifikat.penerbit}
-                    </p>
-                  </div>
-
-                  {sertifikat.link && (
+                  {proyek.linkGithub && (
                     <a
-                      href={sertifikat.link}
+                      href={proyek.linkGithub}
                       target="_blank"
                       rel="noreferrer"
-                      className="mt-auto flex justify-center items-center gap-2 py-2.5 bg-zinc-700/50 hover:bg-violet-600 border border-zinc-600 hover:border-violet-500 rounded-xl text-sm font-semibold transition-all hover:scale-[1.02]"
+                      className="py-2 px-3 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 border border-zinc-700 text-xs font-semibold transition-colors flex items-center gap-1.5"
                     >
-                      <i className="ri-verified-badge-line text-lg"></i> Lihat Sertifikat
+                      <i className="ri-github-fill"></i>
+                      <span>GitHub</span>
                     </a>
+                  )}
+
+                  {!proyek.linkWebsite && !proyek.linkGithub && (
+                    <span className="text-xs text-zinc-400 font-mono py-1.5">Karya Desain Grafis</span>
                   )}
                 </div>
               </div>
             ))}
           </div>
-        </div>
-        {/* === SERTIFIKAT SECTION === */}
+        </section>
 
-        {/* === KONTAK SECTION === */}
-        <div className="kontak mt-32 sm:p-10 p-4 mb-20" id="kontak">
-          <h1 className="text-4xl mb-2 font-bold text-center" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">Mari Berkolaborasi</h1>
-          <p className="text-base/loose text-center mb-10 opacity-50" data-aos="fade-up" data-aos-delay="300" data-aos-once="true">
-            Punya ide proyek, tawaran pekerjaan, atau sekadar ingin menyapa? Jangan ragu untuk mengirim pesan!
-          </p>
-
-          <form
-            action="https://formsubmit.co/fawwazsyams04@email.com"
-            method="POST"
-            className="bg-zinc-800/50 backdrop-blur-md border border-zinc-700/50 p-8 sm:p-12 max-w-2xl rounded-2xl mx-auto shadow-xl"
-            autoComplete="off"
-            data-aos="fade-up"
-            data-aos-delay="500"
-            data-aos-once="true"
-          >
-            <div className="flex flex-col gap-6">
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm font-semibold text-zinc-300">Nama Lengkap</label>
-                  <input
-                    type="text"
-                    name="nama"
-                    placeholder="Masukkan nama..."
-                    className="w-full bg-zinc-900/50 border border-zinc-700 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition-all placeholder:text-zinc-600"
-                    required
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm font-semibold text-zinc-300">Email</label>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="nama@email.com"
-                    className="w-full bg-zinc-900/50 border border-zinc-700 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition-all placeholder:text-zinc-600"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-semibold text-zinc-300">Pesan</label>
-                <textarea
-                  name="pesan"
-                  rows="5"
-                  placeholder="Ceritakan tentang proyek atau tujuanmu..."
-                  className="w-full bg-zinc-900/50 border border-zinc-700 text-white px-4 py-3 rounded-xl focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition-all placeholder:text-zinc-600 resize-none"
-                  required
-                />
-              </div>
-
-              <div className="text-center mt-4">
-                <button
-                  type="submit"
-                  className="bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-bold py-4 px-8 rounded-xl w-full sm:w-auto shadow-lg shadow-violet-500/30 hover:shadow-violet-500/50 hover:-translate-y-1 transition-all duration-300"
-                >
-                  Kirim Pesan
-                </button>
-              </div>
-
+        {/* ========================================================
+            DESAIN GRAFIS & SOCIAL MEDIA GALLERY
+            Honoring real poster & visual works with interactive preview modal
+           ======================================================== */}
+        <section id="desain" className="py-20 border-t border-zinc-800/80">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+            <div>
+              <span className="text-xs font-mono uppercase tracking-wider text-amber-400">Eksplorasi Kreatif</span>
+              <h2 className="text-3xl font-bold text-white mt-2 tracking-tight">Desain Grafis & Media Publikasi</h2>
             </div>
-          </form>
-        </div>
-        {/* === KONTAK SECTION === */}
-      </div>
+            <p className="text-sm text-zinc-400 max-w-md">
+              Karya desain visual, poster acara, dan konten Instagram feed resmi untuk organisasi kepemudaan dan instansi kepolisian.
+            </p>
+          </div>
+
+          {/* Social Proof & Channel Badges */}
+          <div className="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800 mb-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+            <div className="space-y-1">
+              <p className="text-sm font-semibold text-zinc-200">Peran sebagai Graphic Designer & Content Creator:</p>
+              <p className="text-xs text-zinc-400">
+                Memproduksi materi komunikasi visual di Instagram Saka Bhayangkara Polres Cimahi dan Protokol Kwarcab KBB.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href="https://www.instagram.com/sakabhayangkara.cimahi/"
+                target="_blank"
+                rel="noreferrer"
+                className="px-4 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 text-xs font-semibold flex items-center gap-2 transition-colors"
+              >
+                <i className="ri-instagram-line text-sm text-pink-400"></i>
+                @sakabhayangkara.cimahi
+              </a>
+
+              <a
+                href="https://www.instagram.com/protokolkwarcabkbb/"
+                target="_blank"
+                rel="noreferrer"
+                className="px-4 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 text-xs font-semibold flex items-center gap-2 transition-colors"
+              >
+                <i className="ri-instagram-line text-sm text-pink-400"></i>
+                @protokolkwarcabkbb
+              </a>
+            </div>
+          </div>
+
+          {/* Gallery Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {listIgDesigns.map((item) => (
+              <button
+                type="button"
+                key={item.id}
+                onClick={() => setSelectedDesign(item)}
+                className="group text-left rounded-xl bg-zinc-900 border border-zinc-800/90 overflow-hidden hover:border-zinc-700 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              >
+                <div className="aspect-[3/4] bg-zinc-950 overflow-hidden relative">
+                  <img
+                    src={item.src}
+                    alt={item.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <span className="px-3 py-1.5 rounded-md bg-zinc-900/90 text-white text-xs font-medium flex items-center gap-1.5 shadow">
+                      <i className="ri-zoom-in-line text-sm"></i>
+                      Perbesar
+                    </span>
+                  </div>
+                </div>
+                <div className="p-3">
+                  <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider block">{item.kategori}</span>
+                  <p className="text-xs font-semibold text-zinc-200 truncate mt-0.5">{item.title}</p>
+                  <p className="text-[11px] text-zinc-400 truncate mt-0.5">{item.instansi}</p>
+                </div>
+              </button>
+            ))}
+          </div>
+
+          {/* Modal Preview for Design Details (R-26 & R-32 Keyboard accessible) */}
+          {selectedDesign && (
+            <div
+              className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+              onClick={() => setSelectedDesign(null)}
+              role="dialog"
+              aria-modal="true"
+            >
+              <div
+                className="relative bg-zinc-900 border border-zinc-700/80 rounded-2xl max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  type="button"
+                  onClick={() => setSelectedDesign(null)}
+                  aria-label="Tutup pratinjau desain"
+                  className="absolute top-4 right-4 p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white"
+                >
+                  <i className="ri-close-line text-xl"></i>
+                </button>
+
+                <div className="aspect-[3/4] max-h-[60vh] mx-auto rounded-xl overflow-hidden bg-zinc-950 mb-4 flex items-center justify-center">
+                  <img
+                    src={selectedDesign.src}
+                    alt={selectedDesign.title}
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </div>
+
+                <div className="border-t border-zinc-800 pt-4">
+                  <span className="text-xs font-mono text-amber-400 uppercase tracking-wider">{selectedDesign.kategori}</span>
+                  <h3 className="text-xl font-bold text-white mt-1">{selectedDesign.title}</h3>
+                  <p className="text-sm text-zinc-400 mt-1">Dibuat untuk: <span className="text-zinc-200 font-medium">{selectedDesign.instansi}</span></p>
+                </div>
+              </div>
+            </div>
+          )}
+        </section>
+
+        {/* ========================================================
+            SERTIFIKAT & PENGHARGAAN SECTION
+           ======================================================== */}
+        <section id="sertifikat" className="py-20 border-t border-zinc-800/80">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+            <div>
+              <span className="text-xs font-mono uppercase tracking-wider text-indigo-400">Validasi Kemampuan</span>
+              <h2 className="text-3xl font-bold text-white mt-2 tracking-tight">Sertifikasi & Lisensi Resmi</h2>
+            </div>
+            <p className="text-sm text-zinc-400 max-w-md">
+              Pelatihan terstruktur dan sertifikasi kompetensi dari institusi global maupun nasional.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {listSertifikat.map((item) => (
+              <div
+                key={item.id}
+                className="rounded-xl bg-zinc-900/60 border border-zinc-800/90 p-5 flex flex-col justify-between hover:border-zinc-700 transition-colors"
+              >
+                <div>
+                  <div className="aspect-[16/11] rounded-lg bg-zinc-950 overflow-hidden mb-4 border border-zinc-800/80">
+                    <img
+                      src={item.gambar}
+                      alt={item.nama}
+                      loading="lazy"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  <span className="text-xs font-mono text-indigo-400 flex items-center gap-1.5 mb-1.5">
+                    <i className="ri-award-line"></i>
+                    {item.penerbit}
+                  </span>
+                  <h3 className="text-base font-bold text-white leading-snug">{item.nama}</h3>
+                </div>
+
+                <div className="pt-4 mt-4 border-t border-zinc-800/80">
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-full py-2 px-3 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
+                  >
+                    <span>Verifikasi Sertifikat</span>
+                    <i className="ri-external-link-line text-xs"></i>
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ========================================================
+            KONTAK SECTION (Structured & Accessible Form)
+           ======================================================== */}
+        <section id="kontak" className="py-20 border-t border-zinc-800/80">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div className="lg:col-span-5">
+              <span className="text-xs font-mono uppercase tracking-wider text-indigo-400">Hubungi Saya</span>
+              <h2 className="text-3xl font-bold text-white mt-2 tracking-tight">Mari Memulai Percakapan</h2>
+              <p className="text-sm text-zinc-400 mt-4 text-justify leading-relaxed">
+                Apakah Anda memiliki proyek pengembangan aplikasi, kebutuhan desain grafis, tawaran kerja sama, atau sekadar ingin berdiskusi seputar teknologi? Kirimkan pesan melalui formulir atau kontak langsung di bawah ini.
+              </p>
+
+              <div className="mt-8 space-y-4 text-sm">
+                <a
+                  href="mailto:fawwazsyams04@gmail.com"
+                  className="flex items-center gap-3 p-3 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-zinc-700 transition-colors"
+                >
+                  <i className="ri-mail-line text-lg text-indigo-400"></i>
+                  <span>fawwazsyams04@gmail.com</span>
+                </a>
+
+                <div className="flex items-center gap-3 p-3 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-300">
+                  <i className="ri-map-pin-line text-lg text-indigo-400"></i>
+                  <span>Bandung, Jawa Barat, Indonesia</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-7">
+              <div className="p-6 sm:p-8 rounded-2xl bg-zinc-900/80 border border-zinc-800">
+                {formState.status === "success" ? (
+                  <div className="py-12 text-center space-y-4">
+                    <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center text-2xl">
+                      <i className="ri-check-line"></i>
+                    </div>
+                    <h3 className="text-xl font-bold text-white">Pesan Berhasil Terkirim</h3>
+                    <p className="text-sm text-zinc-400 max-w-sm mx-auto">
+                      Terima kasih sudah menghubungi saya. Saya akan segera membaca pesan Anda dan membalasnya secepat mungkin.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => setFormState({ nama: "", email: "", pesan: "", status: "idle" })}
+                      className="px-5 py-2.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-semibold"
+                    >
+                      Kirim Pesan Lain
+                    </button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleFormSubmit} className="space-y-5" autoComplete="off">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      <div className="space-y-1.5">
+                        <label htmlFor="nama" className="text-xs font-semibold text-zinc-300">
+                          Nama Lengkap <span className="text-red-400">*</span>
+                        </label>
+                        <input
+                          id="nama"
+                          type="text"
+                          name="nama"
+                          required
+                          value={formState.nama}
+                          onChange={(e) => setFormState({ ...formState, nama: e.target.value })}
+                          placeholder="Fawwaz Syams"
+                          className="w-full px-4 py-2.5 rounded-lg bg-zinc-950 border border-zinc-700 text-zinc-100 placeholder:text-zinc-500 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        />
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <label htmlFor="email" className="text-xs font-semibold text-zinc-300">
+                          Alamat Email <span className="text-red-400">*</span>
+                        </label>
+                        <input
+                          id="email"
+                          type="email"
+                          name="email"
+                          required
+                          value={formState.email}
+                          onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                          placeholder="nama@perusahaan.com"
+                          className="w-full px-4 py-2.5 rounded-lg bg-zinc-950 border border-zinc-700 text-zinc-100 placeholder:text-zinc-500 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label htmlFor="pesan" className="text-xs font-semibold text-zinc-300">
+                        Isi Pesan <span className="text-red-400">*</span>
+                      </label>
+                      <textarea
+                        id="pesan"
+                        name="pesan"
+                        rows={4}
+                        required
+                        value={formState.pesan}
+                        onChange={(e) => setFormState({ ...formState, pesan: e.target.value })}
+                        placeholder="Ceritakan gambaran proyek atau keperluan Anda..."
+                        className="w-full px-4 py-2.5 rounded-lg bg-zinc-950 border border-zinc-700 text-zinc-100 placeholder:text-zinc-500 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+                      />
+                    </div>
+
+                    {formState.status === "error" && (
+                      <p className="text-xs text-rose-400 flex items-center gap-1.5">
+                        <i className="ri-error-warning-line"></i>
+                        Terjadi kesalahan saat mengirim pesan. Silakan coba kembali atau hubungi via email langsung.
+                      </p>
+                    )}
+
+                    <button
+                      type="submit"
+                      disabled={formState.status === "submitting"}
+                      className="w-full sm:w-auto px-6 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-semibold text-sm transition-colors flex items-center justify-center gap-2"
+                    >
+                      {formState.status === "submitting" ? (
+                        <>
+                          <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                          <span>Mengirimkan...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>Kirim Pesan</span>
+                          <i className="ri-send-plane-fill text-xs"></i>
+                        </>
+                      )}
+                    </button>
+                  </form>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }
-
-export default App;
