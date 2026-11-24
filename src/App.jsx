@@ -142,7 +142,7 @@ export default function App() {
                 />
                 <div className="p-4 bg-zinc-900/95 border-t border-zinc-800/80">
                   <p className="text-sm font-semibold text-zinc-200">Fawwaz Muhammad Syams</p>
-                  <p className="text-xs text-zinc-400">Web Developer & Graphic Designer | Bandung</p>
+                  <p className="text-xs text-zinc-400">Fullstack Engineer & Computer Vision Enthusiast | Bandung</p>
                 </div>
               </div>
             </div>
