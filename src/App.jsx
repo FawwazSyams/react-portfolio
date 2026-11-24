@@ -111,13 +111,6 @@ export default function App() {
                 <i className="ri-file-download-line text-base text-zinc-400"></i>
                 Unduh CV (PDF)
               </a>
-
-              <a
-                href="#desain"
-                className="px-5 py-3 rounded-lg text-zinc-400 hover:text-zinc-200 text-sm font-medium transition-colors"
-              >
-                Eksplorasi Desain Grafis →
-              </a>
             </div>
 
             {/* Quick Context Highlights */}
@@ -288,10 +281,10 @@ export default function App() {
                 alt={flagshipProject.nama}
                 className="w-full h-full min-h-[300px] lg:min-h-[420px] object-cover object-top transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-900/90 border border-zinc-700/80 text-xs font-mono text-amber-400">
+              {/* <div className="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-900/90 border border-zinc-700/80 text-xs font-mono text-amber-400">
                 <span className="w-2 h-2 rounded-full bg-amber-400"></span>
                 Proyek Unggulan (Live)
-              </div>
+              </div> */}
             </div>
 
             <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between">
@@ -392,7 +385,7 @@ export default function App() {
                       rel="noreferrer"
                       className="flex-1 py-2 px-3 rounded-lg bg-indigo-600/20 hover:bg-indigo-600 text-indigo-300 hover:text-white border border-indigo-500/30 text-xs font-semibold text-center transition-colors flex items-center justify-center gap-1.5"
                     >
-                      <span>Lihat Live</span>
+                      <span>Kunjungi Website</span>
                       <i className="ri-external-link-line"></i>
                     </a>
                   )}

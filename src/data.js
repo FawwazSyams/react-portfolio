@@ -134,8 +134,8 @@ export const listProyek = [
     nama: "Website Memontra Booth",
     desk: "Aplikasi penyewaan photobooth berbasis website",
     tools: ["React JS", "Laravel", "MySQL"],
-    linkGithub: "https://github.com/FawwazSyams/memontra-booth.git",
-    linkWebsite: "https://memontrabooth.vercel.app/",
+    linkGithub: "",
+    linkWebsite: "https://momentrabooth.com",
     dad: "300",
   },
   {
@@ -258,9 +258,9 @@ export const listIgDesigns = [
   {
     id: 3,
     src: "/assets/design-ig/design3.png",
-    title: "Pamflet Publikasi Protokol",
-    kategori: "Pamflet Acara",
-    instansi: "Protokol Kwarcab KBB",
+    title: "Pamflet Publikasi Hari Besar",
+    kategori: "Pamflet Informasi",
+    instansi: "Saka Bhayangkara Polres Cimahi",
   },
   {
     id: 4,
@@ -271,23 +271,23 @@ export const listIgDesigns = [
   },
   {
     id: 5,
-    src: "/assets/design-ig/design5.png",
+    src: "/assets/design-ig/design5.heic",
     title: "Dokumentasi & Visual Media",
     kategori: "Desain Informasi",
     instansi: "Protokol Kwarcab KBB",
   },
   {
     id: 6,
-    src: "/assets/design-ig/design6.png",
+    src: "/assets/design-ig/design6.jpg",
     title: "Poster Peringatan Hari Besar",
     kategori: "Poster Editorial",
-    instansi: "Saka Bhayangkara Polres Cimahi",
+    instansi: "Protokol Kwarcab KBB",
   },
   {
     id: 7,
-    src: "/assets/design-ig/design7.png",
-    title: "Banner Kegiatan Resmi",
-    kategori: "Banner & Display",
+    src: "/assets/design-ig/design7.heic",
+    title: "Poster Hari Penting",
+    kategori: "Poster Editorial",
     instansi: "Protokol Kwarcab KBB",
   },
 ];
